@@ -8,9 +8,9 @@ import Productupload from "./components/Productupload";
 import Dashboard from "./components/Dashboard";
 import Productview from "./components/Productview";
 import Productlist from "./components/Productlist";
-import Manufacturerlist from "./components/Manufacturerlist";
-import Manufacturerview from "./components/Manufacturerview";
-import Manufacturerupload from "./components/Manufacturerupload";
+// import Manufacturerlist from "./components/Manufacturerlist";
+// import Manufacturerview from "./components/Manufacturerview";
+// import Manufacturerupload from "./components/Manufacturerupload";
 
 function App() {
     const router = createBrowserRouter([
@@ -28,24 +28,29 @@ function App() {
                 },
                 {
                     path: "productview",
-                    element: <Productview />,
+                    children: [
+                        {
+                            path:":id",
+                            element: <Productview />,
+                        }
+                    ]
                 },
                 {
                     path: "productupload",
                     element: <Productupload />,
                 },
-                {
-                    path: "manufacturerlist",
-                    element: <Manufacturerlist />,
-                },
-                {
-                    path: "manufacturerview",
-                    element: <Manufacturerview />,
-                },
-                {
-                    path: "manufacturerupload",
-                    element: <Manufacturerupload />,
-                },
+                // {
+                //     path: "manufacturerlist",
+                //     element: <Manufacturerlist />,
+                // },
+                // {
+                //     path: "manufacturerview",
+                //     element: <Manufacturerview />,
+                // },
+                // {
+                //     path: "manufacturerupload",
+                //     element: <Manufacturerupload />,
+                // },
                 {
                     path: "user",
                     children: [

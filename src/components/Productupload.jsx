@@ -34,6 +34,7 @@ const Productupload = () => {
                 setSelectedState("");
                 setCities([]); // Clear cities when country changes
             }
+            return;
         }
     }, [selectedCountry]);
 

@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useEffect, useState } from "react";
 import medicine from "../assets/Images/medicine.jpg";
 import PersonIcon from "@mui/icons-material/Person";
 import BrandingWatermarkIcon from "@mui/icons-material/BrandingWatermark";
@@ -8,10 +8,32 @@ import PublishedWithChangesIcon from "@mui/icons-material/PublishedWithChanges";
 import { Rating, Stack, TextareaAutosize } from "@mui/material";
 import profile from "../assets/Images/01.webp";
 import { styled } from "@mui/material/styles";
-
 import LinearProgress, { linearProgressClasses } from "@mui/material/LinearProgress";
+import { useParams } from "react-router-dom";
+import axios from "axios";
 
 const Productview = () => {
+    const { id } = useParams();
+    // console.log(id);
+
+    const [data, setData] = useState({});
+    // console.log(data?.m_name , "fordata");
+
+    const productviewdata = () => {
+        axios
+            .get(`http://192.168.1.4:5000/productview/get-productview/${id}`)
+            .then((res) => {
+                setData(res.data.data?.[0] || {});
+            })
+            .catch((err) => {
+                console.log(err);
+            });
+    };
+
+    useEffect(() => {
+        productviewdata();
+    }, []);
+
     const BorderLinearProgress = styled(LinearProgress)(({ theme }) => ({
         height: 4,
         borderRadius: 3,
@@ -27,36 +49,38 @@ const Productview = () => {
     return (
         <>
             <div>
+                <div></div>
+
                 <div className="shadow bg-white mt-7 mx-5 rounded-md h-16 flex items-center justify-between px-5">
                     <div>
                         <h5 className="text-lg font-medium ">Product View</h5>
                     </div>
-                    <nav class="flex" aria-label="Breadcrumb">
-                        <ol class="inline-flex items-center space-x-1 md:space-x-2 rtl:space-x-reverse">
-                            <li class="inline-flex items-center">
-                                <a href="/dashboard" class="inline-flex items-center text-sm font-medium text-gray-700 hover:text-blue-600 dark:text-gray-400 dark:hover:text-white">
-                                    <svg class="w-3 h-3 me-2.5" aria-hidden="true" xmlns="http://www.w3.org/2000/svg" fill="currentColor" viewBox="0 0 20 20">
+                    <nav className="flex" aria-label="Breadcrumb">
+                        <ol className="inline-flex items-center space-x-1 md:space-x-2 rtl:space-x-reverse">
+                            <li className="inline-flex items-center">
+                                <a href="/dashboard" className="inline-flex items-center text-sm font-medium text-gray-700 hover:text-blue-600 dark:text-gray-400 dark:hover:text-white">
+                                    <svg className="w-3 h-3 me-2.5" aria-hidden="true" xmlns="http://www.w3.org/2000/svg" fill="currentColor" viewBox="0 0 20 20">
                                         <path d="m19.707 9.293-2-2-7-7a1 1 0 0 0-1.414 0l-7 7-2 2a1 1 0 0 0 1.414 1.414L2 10.414V18a2 2 0 0 0 2 2h3a1 1 0 0 0 1-1v-4a1 1 0 0 1 1-1h2a1 1 0 0 1 1 1v4a1 1 0 0 0 1 1h3a2 2 0 0 0 2-2v-7.586l.293.293a1 1 0 0 0 1.414-1.414Z" />
                                     </svg>
                                     Dashboard
                                 </a>
                             </li>
                             <li>
-                                <div class="flex items-center">
-                                    <svg class="rtl:rotate-180 w-3 h-3 text-gray-400 " aria-hidden="true" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 6 10">
-                                        <path stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="m1 9 4-4-4-4" />
+                                <div className="flex items-center">
+                                    <svg className="rtl:rotate-180 w-3 h-3 text-gray-400 " aria-hidden="true" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 6 10">
+                                        <path stroke="currentColor" strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="m1 9 4-4-4-4" />
                                     </svg>
-                                    <a href="#" class=" text-sm font-medium text-gray-700 hover:text-blue-600 md:ms-2 dark:text-gray-400 dark:hover:text-white">
+                                    <a href="#" className=" text-sm font-medium text-gray-700 hover:text-blue-600 md:ms-2 dark:text-gray-400 dark:hover:text-white">
                                         Products
                                     </a>
                                 </div>
                             </li>
                             <li aria-current="page">
-                                <div class="flex items-center">
-                                    <svg class="rtl:rotate-180 w-3 h-3 text-gray-400" aria-hidden="true" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 6 10">
-                                        <path stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="m1 9 4-4-4-4" />
+                                <div className="flex items-center">
+                                    <svg className="rtl:rotate-180 w-3 h-3 text-gray-400" aria-hidden="true" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 6 10">
+                                        <path stroke="currentColor" strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="m1 9 4-4-4-4" />
                                     </svg>
-                                    <span class=" text-sm font-medium text-gray-500 md:ms-2 dark:text-gray-400">Product view</span>
+                                    <span className=" text-sm font-medium text-gray-500 md:ms-2 dark:text-gray-400">Product view</span>
                                 </div>
                             </li>
                         </ol>
@@ -66,6 +90,7 @@ const Productview = () => {
                     <div className="flex gap-10">
                         <div>
                             <h5 className="text-lg font-medium py-4 ">Product Gallery</h5>
+                            <p>{data.product_title}</p>
                             <div>
                                 <img src={medicine} className=" border-2 border-dashed border-neutral-300 rounded-md w-80"></img>
                             </div>

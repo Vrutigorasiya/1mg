@@ -14,7 +14,7 @@ import { Link } from "react-router-dom";
 const Navbar = ({ isOpen }) => {
     return (
         <>
-            <div className="hidden md:block ">
+            <div className={`hidden md:block max-w-[${!isOpen ? '80px' : '25px'}]`}>
                 <Sidebar className="h-full" collapsed={!isOpen}>
                     <div className="flex py-3 px-5">
                         <img src={logo} alt="logo" className="w-8 lg:block md:w-11" />
@@ -26,7 +26,7 @@ const Navbar = ({ isOpen }) => {
                         </MenuItem>
                         <SubMenu label="Products" icon={<LocalParkingIcon />}>
                             <MenuItem component={<Link to="/productlist" />}>Product List</MenuItem>
-                            <MenuItem component={<Link to="/productview" />}>Product View</MenuItem>
+                            {/* <MenuItem component={<Link to="/productview" />}>Product View</MenuItem> */}
                             <MenuItem component={<Link to="/productupload" />}>Product Upload</MenuItem>
                         </SubMenu>
                         <SubMenu label="Manufacturer" icon={<FactoryIcon />}>

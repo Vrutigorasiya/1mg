@@ -20,9 +20,9 @@ const Rootlayout = () => {
     };
 
     return (
-        <div className="w-full flex h-screen">
+        <div className="flex h-[100vh]">
             <Navbar isOpen={isSidebarOpen} onSidebarToggle={handleSidebarToggle} />
-            <div className="flex-1 h-full">
+            <div className={!isSidebarOpen ? `h-full w-full md:max-w-[calc(100%-80px)]` : `h-full w-full md:max-w-[calc(100%-250px)]`}>
                 <Header onSidebarToggle={handleSidebarToggle} />
                 <main className="overflow-y-auto h-[calc(100%-70px)]">
                     <Outlet />

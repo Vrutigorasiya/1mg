@@ -4,11 +4,7 @@
 body {
     font-family: "Open Sans", sans-serif;
 }
-*{
-    padding: 0;
-    margin: 0;
-    box-sizing: border-box;
-}
+
 .input_field_change .MuiOutlinedInput-notchedOutline{
     box-shadow: none !important;
     border: 0px !important;
