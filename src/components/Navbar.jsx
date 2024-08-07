@@ -25,14 +25,12 @@ const Navbar = ({ isOpen }) => {
                             Dashboard
                         </MenuItem>
                         <MenuItem icon={<LocalParkingIcon />} component={<Link to="/productlist" />}>
-                            Dashboard
+                            Products
                         </MenuItem>
-                        {/* <SubMenu label="Products" icon={<LocalParkingIcon />}>
-                            <MenuItem component={<Link to="/productlist" />}>Product List</MenuItem> */}
-                            {/* <MenuItem component={<Link to="/productview" />}>Product View</MenuItem> */}
-                            {/* <MenuItem component={<Link to="/productupload" />}>Product Upload</MenuItem> */}
-                        {/* </SubMenu> */}
-                        <SubMenu label="Manufacturer" icon={<FactoryIcon />}>
+                        {/* <MenuItem icon={<FactoryIcon />} component={<Link to="/manufacturerlist" />}>
+                            Manufacturer
+                        </MenuItem> */}
+                        <SubMenu icon={<FactoryIcon />} label="Manufacturer" >
                             <MenuItem component={<Link to="/manufacturerlist" />}>Manufacturer List</MenuItem>
                             <MenuItem component={<Link to="/manufacturerview" />}>Manufacturer View</MenuItem>
                             <MenuItem component={<Link to="/manufacturerupload" />}>Manufacturer Upload</MenuItem>

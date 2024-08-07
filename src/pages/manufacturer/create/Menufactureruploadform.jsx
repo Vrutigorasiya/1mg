@@ -2,9 +2,9 @@ import {useEffect, useState} from "react";
 import {FormControl, Select, MenuItem} from "@mui/material";
 import {Country, State, City} from "country-state-city";
 import {useFormik} from "formik";
-import {api} from "../../api";
+import {api} from "../../../api";
 
-const Menufacturerlst = () => {
+const Menufactureruploadform = () => {
     const [selectedCountry, setSelectedCountry] = useState("");
     const [selectedState, setSelectedState] = useState("");
     const [selectedCity, setSelectedCity] = useState("");
@@ -408,4 +408,4 @@ const Menufacturerlst = () => {
     );
 };
 
-export default Menufacturerlst;
+export default Menufactureruploadform;
