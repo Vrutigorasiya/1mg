@@ -5,11 +5,9 @@ import SearchIcon from "@mui/icons-material/Search";
 import LightModeIcon from "@mui/icons-material/LightMode";
 import DarkModeIcon from "@mui/icons-material/DarkMode";
 import NotificationsNoneIcon from "@mui/icons-material/NotificationsNone";
-import profile from "../assets/Images/01.webp";
 import PersonAddIcon from "@mui/icons-material/PersonAdd";
 import SecurityIcon from "@mui/icons-material/Security";
 import LogoutIcon from "@mui/icons-material/Logout";
-import logo from "../assets/Images/logo.png";
 import DashboardIcon from "@mui/icons-material/Dashboard";
 import LocalParkingIcon from "@mui/icons-material/LocalParking";
 import FactoryIcon from '@mui/icons-material/Factory';
@@ -17,7 +15,7 @@ import ShoppingCartCheckoutIcon from "@mui/icons-material/ShoppingCartCheckout";
 import MessageIcon from "@mui/icons-material/Message";
 import NotificationsIcon from "@mui/icons-material/Notifications";
 import SettingsIcon from "@mui/icons-material/Settings";
-import { Sidebar, Menu, MenuItem, SubMenu } from "react-pro-sidebar";
+import {  Menu, MenuItem, SubMenu } from "react-pro-sidebar";
 import { Link } from "react-router-dom";
 
 const Header = ({ isOpen, onSidebarToggle }) => {
@@ -102,8 +100,8 @@ const Header = ({ isOpen, onSidebarToggle }) => {
                     <MenuIcon className="text-slate-200" />
                 </Button>
                 <div className="flex md:!hidden">
-                    <img src={logo} alt="logo" className="w-12 h-12" />
-                    <h3 className="uppercase font-bold my-auto pl-2 text-sm sm:!block max-[345px]:hidden">Dava's bazar</h3>
+                    <img src="imgs/logo.jpg" alt="logo" className="w-12 h-12" />
+                    <h3 className="uppercase font-bold my-auto pl-2 text-sm sm:!block max-[345px]:hidden">{"Dava's"} bazar</h3>
                 </div>
                 <FormControl variant="outlined" className="!hidden md:!block">
                     <OutlinedInput
@@ -145,7 +143,7 @@ const Header = ({ isOpen, onSidebarToggle }) => {
                     <Typography sx={{ p: 2 }}>Alerts(3)</Typography>
                 </Popover>
                 <Button aria-describedby={profileId} onClick={handleProfileClick} className="flex items-center">
-                    <img src={profile} alt="profile" className="w-8 h-8 md:w-10 md:h-10 rounded-full border-2 border-indigo-300 object-cover" />
+                    <img src="imgs/01.webp" alt="profile" className="w-8 h-8 md:w-10 md:h-10 rounded-full border-2 border-indigo-300 object-cover" />
                     <div className="pl-2 hidden lg:block">
                         <h4 className="font-bold capitalize text-black">medicine patel</h4>
                         <p className="text-sm text-start capitalize text-black">@dava17</p>

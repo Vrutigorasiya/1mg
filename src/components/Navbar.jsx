@@ -1,5 +1,5 @@
-import React from "react";
-import logo from "../assets/Images/logo.png";
+
+
 import DashboardIcon from "@mui/icons-material/Dashboard";
 import LocalParkingIcon from "@mui/icons-material/LocalParking";
 import FactoryIcon from '@mui/icons-material/Factory';
@@ -17,18 +17,21 @@ const Navbar = ({ isOpen }) => {
             <div className={`hidden md:block max-w-[${!isOpen ? '80px' : '25px'}]`}>
                 <Sidebar className="h-full" collapsed={!isOpen}>
                     <div className="flex py-3 px-5">
-                        <img src={logo} alt="logo" className="w-8 lg:block md:w-11" />
-                        {isOpen && <h3 className="uppercase font-bold md:text-xl my-auto pl-2">Dava's bazar</h3>}
+                        <img src="imgs/logo.jpg" alt="logo" className="w-8 lg:block md:w-11" />
+                        {isOpen && <h3 className="uppercase font-bold md:text-xl my-auto pl-2">{"Dava's"} bazar</h3>}
                     </div>
                     <Menu>
                         <MenuItem icon={<DashboardIcon />} component={<Link to="/dashboard" />}>
                             Dashboard
                         </MenuItem>
-                        <SubMenu label="Products" icon={<LocalParkingIcon />}>
-                            <MenuItem component={<Link to="/productlist" />}>Product List</MenuItem>
+                        <MenuItem icon={<LocalParkingIcon />} component={<Link to="/productlist" />}>
+                            Dashboard
+                        </MenuItem>
+                        {/* <SubMenu label="Products" icon={<LocalParkingIcon />}>
+                            <MenuItem component={<Link to="/productlist" />}>Product List</MenuItem> */}
                             {/* <MenuItem component={<Link to="/productview" />}>Product View</MenuItem> */}
-                            <MenuItem component={<Link to="/productupload" />}>Product Upload</MenuItem>
-                        </SubMenu>
+                            {/* <MenuItem component={<Link to="/productupload" />}>Product Upload</MenuItem> */}
+                        {/* </SubMenu> */}
                         <SubMenu label="Manufacturer" icon={<FactoryIcon />}>
                             <MenuItem component={<Link to="/manufacturerlist" />}>Manufacturer List</MenuItem>
                             <MenuItem component={<Link to="/manufacturerview" />}>Manufacturer View</MenuItem>

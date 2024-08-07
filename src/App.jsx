@@ -4,8 +4,8 @@ import { createBrowserRouter, RouterProvider } from "react-router-dom";
 import Login from "./components/Login";
 import User from "./components/User";
 import Rootlayout from "./components/Rootlayout";
-import Productupload from "./components/Productupload";
 import Dashboard from "./components/Dashboard";
+<<<<<<< Updated upstream
 import Productview from "./components/Productview";
 import Productlist from "./components/Productlist";
 // import Manufacturerlist from "./components/Manufacturerlist";
@@ -19,6 +19,14 @@ import Adminorder from "./components/Adminorder";
 
 
 
+=======
+import Productlist from "./pages/products/Productlist"
+import Registerform from "./components/Registeform"
+import Adminorder from "./pages/adminorders/Adminorder"
+import Error from "./components/Error"
+import Productview from "./pages/products/view/Productview";
+import Productcreateform from "./pages/products/create/Productcreateform";
+>>>>>>> Stashed changes
 
 function App() {
     const router = createBrowserRouter([
@@ -30,6 +38,11 @@ function App() {
                     path: "dashboard",
                     element: <Dashboard />,
                 },
+                {
+                    path: "error",
+                    element: <Error/>,
+                },
+                
                 {
                     path: "login",
                     element: <Login/>,
@@ -44,7 +57,11 @@ function App() {
                 },
                 {
                     path: "productlist",
-                    element: <Productlist />,
+                    element: <Productlist/>,
+                },
+                {
+                    path: "productcreateform",
+                    element: <Productcreateform/>,
                 },
                 {
                     path: "productview",
@@ -56,6 +73,7 @@ function App() {
                     ],
                 },
                 {
+<<<<<<< Updated upstream
                     path: "productupload",
                     element: <Productupload />,
                 },
@@ -84,6 +102,8 @@ function App() {
                     element: <Manufacturerupload />,
                 },
                 {
+=======
+>>>>>>> Stashed changes
                     path: "user",
                     children: [
                         {
