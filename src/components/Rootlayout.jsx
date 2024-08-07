@@ -1,11 +1,11 @@
 import React, { useState, useEffect } from "react";
 import Navbar from "./Navbar";
 import Header from "./Header";
-import { Outlet } from "react-router-dom";
+import { Outlet, useLocation } from "react-router-dom";
 
 const Rootlayout = () => {
     const [isSidebarOpen, setIsSidebarOpen] = useState(false);
-
+    
     useEffect(() => {
         const storedState = localStorage.getItem("sidebarOpen") === "true";
         setIsSidebarOpen(storedState);

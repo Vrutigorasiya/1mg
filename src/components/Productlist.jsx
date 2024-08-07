@@ -32,7 +32,7 @@ const Productlist = () => {
             <div className="mx-auto w-full">
                 <div className="shadow bg-white mt-7 mx-3 rounded-md p-5 block md:flex lg:flex items-center justify-between">
                     <div className=" ">
-                        <h5 className="text-lg font-medium">Product Upload</h5>
+                        <h5 className="text-lg font-medium">Product list</h5>
                     </div>
                     <nav className="flex" aria-label="Breadcrumb">
                         <ol className="inline-flex items-center space-x-1 md:space-x-2 rtl:space-x-reverse">
@@ -50,18 +50,18 @@ const Productlist = () => {
                                         <path stroke="currentColor" strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="m1 9 4-4-4-4" />
                                     </svg>
                                     <Link to="#" className="ms-1 text-sm font-medium text-gray-700 hover:text-blue-600 md:ms-2 dark:text-gray-400 dark:hover:text-white">
-                                        Products
+                                        Product list
                                     </Link>
                                 </div>
                             </li>
-                            <li aria-current="page">
+                            {/* <li aria-current="page">
                                 <div className="flex items-center">
                                     <svg className="rtl:rotate-180 w-3 h-3 text-gray-400 mx-1" aria-hidden="true" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 6 10">
                                         <path stroke="currentColor" strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="m1 9 4-4-4-4" />
                                     </svg>
                                     <span className="ms-1 text-sm font-medium text-gray-500 md:ms-2 dark:text-gray-400">Product upload</span>
                                 </div>
-                            </li>
+                            </li> */}
                         </ol>
                     </nav>
                 </div>
@@ -178,7 +178,7 @@ const Productlist = () => {
                                             <td className="px-2 py-2 border-r border-gray-300 text-center">${value.product_price}</td>
                                             <td className="px-2 py-2 border-r border-gray-300 text-center">{value.product_stock_quantity}</td>
                                             <td className="px-2 py-2 border-r border-gray-300">
-                                                <img src={value.product_img1} alt="abc" className="w-12 h-12 object-cover" />
+                                                <img src={value.product_images} alt="abc" className="w-12 h-12 object-cover" />
                                             </td>
                                             <td className="px-2 py-2 border-r border-gray-300">{value.seller_company_name}</td>
                                             <td className="px-2 py-2 border-r border-gray-300">{value.m_name}</td>
