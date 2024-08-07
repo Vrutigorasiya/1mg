@@ -15,7 +15,10 @@
     "@mui/icons-material": "^5.16.5",
     "@mui/material": "^5.16.6",
     "@mui/styled-engine-sc": "^6.0.0-alpha.18",
+<<<<<<< Updated upstream
     "@mui/x-charts": "^7.12.0",
+=======
+>>>>>>> Stashed changes
     "axios": "^1.7.3",
     "country-state-city": "^3.2.1",
     "formik": "^2.4.6",

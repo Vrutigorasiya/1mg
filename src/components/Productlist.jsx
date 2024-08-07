@@ -1,5 +1,9 @@
+<<<<<<< Updated upstream
 import axios from "axios";
 import React, { useEffect, useState } from "react";
+=======
+
+>>>>>>> Stashed changes
 import { Link } from "react-router-dom";
 import VisibilityIcon from "@mui/icons-material/Visibility";
 import EditIcon from "@mui/icons-material/Edit";
@@ -66,10 +70,17 @@ const Productlist = () => {
                     </nav>
                 </div>
                 {/* user slider */}
+<<<<<<< Updated upstream
                 <section className="my-10 overflow-x-auto">
                     <div className="gap-7 p-3 flex overflow-x-auto">
                         <div className="border shadow rounded-xl min-w-72 w-1/3 bg-gradient-to-r from-green-300 to-green-200">
                             <div className="my-10 ms-16 text-white ">
+=======
+                <section className=" mx-10 my-10  ">
+                    <div className="gap-5  md:flex-nowrap lg:flex-nowrap lg:flex md:flex block overflow-x-auto justify-between  ">
+                        <div className="border shadow-2xl rounded-xl  min-w-72 w-1/3 bg-gradient-to-r from-green-300 to-green-200">
+                            <div className="my-10 ms-16 text-white">
+>>>>>>> Stashed changes
                                 <p className="text-xl">Total User</p>
                                 <p className="text-3xl font-bold">100</p>
                             </div>

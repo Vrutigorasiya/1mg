@@ -1,4 +1,8 @@
+<<<<<<< Updated upstream
 import React, { useEffect, useRef, useState } from "react";
+=======
+
+>>>>>>> Stashed changes
 import medicine from "../assets/Images/medicine.jpg";
 import PersonIcon from "@mui/icons-material/Person";
 import BrandingWatermarkIcon from "@mui/icons-material/BrandingWatermark";
