@@ -33,7 +33,6 @@ const Productupload = () => {
     const [hover, setHover] = React.useState(-1);
     const [images, setImges] = useState(["", "", "", "", ""]);
 
-
     const inputRef = useRef(null);
 
     const handleImageclick = () => {

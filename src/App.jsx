@@ -8,11 +8,9 @@ import Productupload from "./components/Productupload";
 import Dashboard from "./components/Dashboard";
 import Productview from "./components/Productview";
 import Productlist from "./components/Productlist";
-<<<<<<< Updated upstream
 // import Manufacturerlist from "./components/Manufacturerlist";
 // import Manufacturerview from "./components/Manufacturerview";
 // import Manufacturerupload from "./components/Manufacturerupload";
-=======
 import Manufacturerview from "./components/Manufacturerview";
 import Manufacturerupload from "./components/Manufacturerupload";
 import Menufacturerlst from "./components/Menufacturerlst";
@@ -21,7 +19,6 @@ import Adminorder from "./components/Adminorder";
 
 
 
->>>>>>> Stashed changes
 
 function App() {
     const router = createBrowserRouter([
@@ -53,16 +50,15 @@ function App() {
                     path: "productview",
                     children: [
                         {
-                            path:":id",
+                            path: ":id",
                             element: <Productview />,
-                        }
-                    ]
+                        },
+                    ],
                 },
                 {
                     path: "productupload",
                     element: <Productupload />,
                 },
-<<<<<<< Updated upstream
                 // {
                 //     path: "manufacturerlist",
                 //     element: <Manufacturerlist />,
@@ -75,7 +71,6 @@ function App() {
                 //     path: "manufacturerupload",
                 //     element: <Manufacturerupload />,
                 // },
-=======
                 {
                     path: "manufacturerlist",
                     element: <Menufacturerlst/>,
@@ -88,7 +83,6 @@ function App() {
                     path: "manufacturerupload",
                     element: <Manufacturerupload />,
                 },
->>>>>>> Stashed changes
                 {
                     path: "user",
                     children: [
