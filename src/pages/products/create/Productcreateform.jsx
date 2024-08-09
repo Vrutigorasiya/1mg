@@ -53,7 +53,6 @@ const Productcreateform = () => {
         setImges([...images]);
     };
 
-
     const labels = {
         0.5: "0.5",
         1: "1",
@@ -72,7 +71,7 @@ const Productcreateform = () => {
     }
 
     return (
-        <>
+        <div ref={eleemntref}>
             <div className="container mx-auto">
                 <div className="shadow bg-white mt-7 mx-3 rounded-md p-5 block md:flex lg:flex items-center justify-between">
                     <div className=" ">
@@ -420,7 +419,7 @@ const Productcreateform = () => {
                     </div>
                 </form>
             </div>
-        </>
+        </div>
     );
 };
 

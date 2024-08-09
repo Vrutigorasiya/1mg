@@ -5,17 +5,17 @@ import SearchIcon from "@mui/icons-material/Search";
 import LightModeIcon from "@mui/icons-material/LightMode";
 import DarkModeIcon from "@mui/icons-material/DarkMode";
 import NotificationsNoneIcon from "@mui/icons-material/NotificationsNone";
-import PersonAddIcon from "@mui/icons-material/PersonAdd";
+import PersonIcon from "@mui/icons-material/Person";
 import SecurityIcon from "@mui/icons-material/Security";
 import LogoutIcon from "@mui/icons-material/Logout";
 import DashboardIcon from "@mui/icons-material/Dashboard";
 import LocalParkingIcon from "@mui/icons-material/LocalParking";
-import FactoryIcon from '@mui/icons-material/Factory';
+import FactoryIcon from "@mui/icons-material/Factory";
 import ShoppingCartCheckoutIcon from "@mui/icons-material/ShoppingCartCheckout";
 import MessageIcon from "@mui/icons-material/Message";
 import NotificationsIcon from "@mui/icons-material/Notifications";
 import SettingsIcon from "@mui/icons-material/Settings";
-import {  Menu, MenuItem, SubMenu } from "react-pro-sidebar";
+import { Menu, MenuItem, SubMenu } from "react-pro-sidebar";
 import { Link } from "react-router-dom";
 
 const Header = ({ isOpen, onSidebarToggle }) => {
@@ -160,10 +160,12 @@ const Header = ({ isOpen, onSidebarToggle }) => {
                     }}
                 >
                     <div>
-                        <div className="flex p-3 hover:bg-gray-100 cursor-pointer" onClick={handleProfileClose}>
-                            <PersonAddIcon style={{ color: "#6b7280", fontSize: "20px" }} />
-                            <p className="text-sm pl-2">My Account</p>
-                        </div>
+                        <Link to="/adminprofile">
+                            <div className="flex p-3 hover:bg-gray-100 cursor-pointer" onClick={handleProfileClose}>
+                                <PersonIcon style={{ color: "#6b7280", fontSize: "20px" }} />
+                                <p className="text-sm pl-2">My Account</p>
+                            </div>
+                        </Link>
                         <div className="flex p-3 hover:bg-gray-100 cursor-pointer" onClick={handleProfileClose}>
                             <SecurityIcon style={{ color: "#6b7280", fontSize: "20px" }} />
                             <p className="text-sm pl-2">Reset Password</p>

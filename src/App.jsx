@@ -48,8 +48,12 @@ function App() {
                     element: <Adminorder />,
                 },
                 {
+                    path: "adminprofile",
+                    element: <Adminprofile />,
+                },
+                {
                     path: "productlist",
-                    element: <Productlist/>
+                    element: <Productlist />,
                 },
                 {
                     path: "productcreateform",

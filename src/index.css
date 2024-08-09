@@ -48,3 +48,7 @@ body {
 .ps-menu-button:hover {
     background-color: bisque !important;
 }
+.close button {
+    font-size: x-large;
+}
+

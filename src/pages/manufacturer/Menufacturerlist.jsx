@@ -1,61 +1,66 @@
 import axios from "axios";
-import { useEffect, useState } from "react";
+import React, { useEffect, useState } from "react";
 import { Link } from "react-router-dom";
 import VisibilityIcon from "@mui/icons-material/Visibility";
 import EditIcon from "@mui/icons-material/Edit";
 import DeleteIcon from "@mui/icons-material/Delete";
 
-const Productlist = () => {
+const Menufacturerlist = () => {
     const [orders, setOrders] = useState([]);
-    const [search, setSearch] = useState("");
-
-    const [product, setProduct] = useState({
-        name: "",
-        price: "",
-        seller_id: "",
-        manufacturer_id: "",
-    });
-
-    const orderdata = () => {
-        axios
-            .get(`http://192.168.1.4:5000/product/get-products?search=${search}`)
-            .then((res) => {
-                setOrders(res.data.data);
-                // console.log(res, "res");
-            })
-            .catch((err) => {
-                console.log(err);
-            });
-    };
+    // const [searchmanu, setSearchmanu] = useState("");
 
     useEffect(() => {
-        searchinput();
-    }, [search]);
+        axios
+            .get("http://192.168.1.4:5000/manufacturer/get-manufacturers")
+            .then((response) => {
+                const dataWithBase64Images = response.data.data.map((item) => {
+                    // Ensure m_logo is properly set as a Base64 string in the backend
+                    return item;
+                });
 
-    const searchInputhandler = (e) => {
-        setSearch(e.target.value);
-    };
-    // console.log(search,"searchh");
+                setOrders(dataWithBase64Images);
+            })
+            .catch((error) => console.error("Error fetching data:", error));
+    }, []);
 
-    const delete_Data = async (productId) => {
+    console.log(orders);
+    const delete_Data = async (id) => {
         try {
-            console.log(`Deleting item with ID: ${productId}`);
-            await axios.delete(`http://192.168.1.4:5000/product/delete-products/${productId}`);
+            console.log(`Deleting item with ID: ${id}`);
+            await axios.delete(`http://192.168.1.4:5000/manufacturer/delete-manufacturers/${id}`);
             // Remove the deleted item from the state
-            setOrders((prevOrders) => prevOrders.filter((order) => order.product_id !== productId));
+            setOrders((prevOrders) => prevOrders.filter((order) => order.id !== id));
         } catch (error) {
             console.error("Error deleting data:", error);
         }
     };
+    // const searchinputmanu = () => {
+    //     axios
+    //         .get(`http://192.168.1.4:5000/product/get-product2?search=${searchmanu}`)
+    //         .then((res) => {
+    //             setOrders(res.data.data);
+    //             // console.log(res, "res");
+    //         })
+    //         .catch((err) => {
+    //             console.log(err);
+    //         });
+    // };
 
-    
+    // useEffect(() => {
+    //     searchinputmanu();
+    // }, [searchmanu]);
+
+    // const manusearchInputhandler = (e) => {
+    //     setSearchmanu(e.target.value);
+    // };
+    // console.log(search,"searchh");
 
     return (
-        <>
+        <div>
             <div className="mx-auto w-full">
                 <div className="shadow bg-white mt-7 mx-3 rounded-md p-5 block md:flex lg:flex items-center justify-between">
-                    <div className=" ">
-                        <h5 className="text-lg font-medium">Product list</h5>
+                    <div>
+                        <h5 className="text-lg font-medium">Manufacturer List</h5>
                     </div>
                     <nav className="flex" aria-label="Breadcrumb">
                         <ol className="inline-flex items-center space-x-1 md:space-x-2 rtl:space-x-reverse">
@@ -80,7 +85,8 @@ const Productlist = () => {
                         </ol>
                     </nav>
                 </div>
-                {/* user slider */}
+
+                {/* User Slider */}
                 <section className="my-10 overflow-x-auto">
                     <div className="gap-7 p-3 flex overflow-x-auto">
                         <div className="border shadow rounded-xl min-w-72 w-1/3 bg-gradient-to-r from-green-300 to-green-200">
@@ -103,7 +109,9 @@ const Productlist = () => {
                         </div>
                     </div>
                 </section>
-                {/* best selling product section */}
+
+                {/* Best Selling Product Section */}
+
                 <section className="mx-5 my-5 !overflow-hidden ">
                     <div className="!w-full border shadow bg-white rounded-md p-5 block">
                         <div className="">
@@ -121,7 +129,7 @@ const Productlist = () => {
                                         </svg>
                                     </div>
                                     <input
-                                        onChange={searchInputhandler}
+                                        // onChange={manusearchInputhandler}
                                         type="search"
                                         id="default-search"
                                         className="block max-w-52 w-full h-10 p-4 ps-10 text-sm text-gray-900 border border-gray-300 rounded-lg bg-gray-50 focus:ring-blue-500 focus:border-blue-500 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500"
@@ -130,7 +138,7 @@ const Productlist = () => {
                                     />
                                 </div>
                             </form>
-                            <Link to="/productcreateform">
+                            <Link to="/manufactureruploadform">
                                 <button className="w-full lg:w-40  md:w-40 px-5 py-2.5 focus:outline-none text-white bg-green-700 hover:bg-green-800 focus:ring-4 focus:ring-green-300 font-medium rounded-lg  dark:bg-green-600 dark:hover:bg-green-700 dark:focus:ring-green-800 text-base">
                                     Create Product
                                 </button>
@@ -145,58 +153,59 @@ const Productlist = () => {
                                             ID
                                         </th>
                                         <th scope="col" className="px-4 py-2 border-r border-gray-300">
-                                            Title
+                                            logo
                                         </th>
                                         <th scope="col" className="px-4 py-2 border-r border-gray-300">
-                                            Brand
+                                            manufacturer name
                                         </th>
                                         <th scope="col" className="px-4 py-2 border-r border-gray-300">
-                                            Rating
+                                            manufacturer number
                                         </th>
                                         <th scope="col" className="px-4 py-2 border-r border-gray-300">
-                                            Category
+                                            manufacturer category
                                         </th>
                                         <th scope="col" className="px-4 py-2 border-r border-gray-300">
-                                            Price
+                                            manufacturer lic number
                                         </th>
                                         <th scope="col" className="px-4 py-2 border-r border-gray-300">
-                                            Stock Quantity
+                                            email
                                         </th>
                                         <th scope="col" className="px-4 py-2 border-r border-gray-300">
-                                            Product Image
+                                            manufacturer company name
                                         </th>
-                                        <th scope="col" className="px-4 py-2 border-r border-gray-300">
-                                            Seller Company Name
-                                        </th>
-                                        <th scope="col" className="px-4 py-2 border-r border-gray-300">
-                                            Manufacturer Name
-                                        </th>
+
                                         <th scope="col" className="px-4 py-2">
                                             Action
                                         </th>
                                     </tr>
                                 </thead>
                                 <tbody>
-                                    {orders.map((value, index) => (
-                                        <tr key={index} className="bg-white border-b dark:bg-gray-800 dark:border-gray-700">
+                                    {orders.map((order, index) => (
+                                        <tr key={order.id} className="bg-white border-b dark:bg-gray-800 dark:border-gray-700">
                                             <td className="px-2 py-2 border-r border-gray-300 text-center">{index + 1}</td>
-                                            <td className="px-2 py-2 border-r border-gray-300 ">{value.product_title}</td>
-                                            <td className="px-2 py-2 border-r border-gray-300">{value.product_brand}</td>
-                                            <td className="px-2 py-2 border-r border-gray-300 text-center">{value.product_rating}</td>
-                                            <td className="px-2 py-2 border-r border-gray-300">{value.product_category}</td>
-                                            <td className="px-2 py-2 border-r border-gray-300 text-center">${value.product_price}</td>
-                                            <td className="px-2 py-2 border-r border-gray-300 text-center">{value.product_stock_quantity}</td>
-                                            <td className="px-2 py-2 border-r border-gray-300">
-                                                <img src={value.product_images} alt="abc" className="w-12 h-12 object-cover" />
+                                            <td className="px-2 py-2 border-r border-gray-300 text-center">
+                                                {order.m_logo ? (
+                                                    <img src={`http://192.168.1.4:5000/manufacturer/file/${order.file_name}`} alt="Logo" style={{ width: 50, height: 50 }} />
+                                                ) : (
+                                                    <img
+                                                        src="https://cdn.pixabay.com/photo/2015/10/05/22/37/blank-profile-picture-973460_960_720.png"
+                                                        alt="abc"
+                                                        style={{ width: 50, height: 50 }}
+                                                    ></img>
+                                                )}
                                             </td>
-                                            <td className="px-2 py-2 border-r border-gray-300">{value.seller_company_name}</td>
-                                            <td className="px-2 py-2 border-r border-gray-300">{value.m_name}</td>
+                                            <td className="px-2 py-2 border-r border-gray-300 text-center">{order.m_name}</td>
+                                            <td className="px-2 py-2 border-r border-gray-300 text-center">{order.m_number}</td>
+                                            <td className="px-2 py-2 border-r border-gray-300 text-center">{order.m_category}</td>
+                                            <td className="px-2 py-2 border-r border-gray-300 text-center">{order.m_lic_number}</td>
+                                            <td className="px-2 py-2 border-r border-gray-300 text-center">{order.email}</td>
+                                            <td className="px-2 py-2 border-r border-gray-300 text-center">{order.m_c_name}</td>
                                             <td className="px-2 py-5 gap-2 flex">
-                                                <Link to={`/productview/${value.product_id}`}>
+                                                <Link to={`/manufacturerview/${order.product_id}`}>
                                                     <VisibilityIcon className="bg-slate-300 rounded !text-xl" />
                                                 </Link>
                                                 <EditIcon className="bg-slate-300 rounded !text-xl" />
-                                                <DeleteIcon onClick={() => delete_Data(value.product_id)} className="bg-slate-300 rounded !text-xl" />
+                                                <DeleteIcon onClick={() => delete_Data(order.id)} className="bg-slate-300 rounded !text-xl" />
                                             </td>
                                         </tr>
                                     ))}
@@ -206,8 +215,8 @@ const Productlist = () => {
                     </div>
                 </section>
             </div>
-        </>
+        </div>
     );
 };
 
-export default Productlist;
+export default Menufacturerlist;

@@ -1,8 +1,6 @@
-
-
 import DashboardIcon from "@mui/icons-material/Dashboard";
 import LocalParkingIcon from "@mui/icons-material/LocalParking";
-import FactoryIcon from '@mui/icons-material/Factory';
+import FactoryIcon from "@mui/icons-material/Factory";
 import ShoppingCartCheckoutIcon from "@mui/icons-material/ShoppingCartCheckout";
 import MessageIcon from "@mui/icons-material/Message";
 import NotificationsIcon from "@mui/icons-material/Notifications";
@@ -14,7 +12,7 @@ import { Link } from "react-router-dom";
 const Navbar = ({ isOpen }) => {
     return (
         <>
-            <div className={`hidden md:block max-w-[${!isOpen ? '80px' : '25px'}]`}>
+            <div className={`hidden md:block max-w-[${!isOpen ? "80px" : "25px"}]`}>
                 <Sidebar className="h-full" collapsed={!isOpen}>
                     <div className="flex py-3 px-5">
                         <img src="imgs/logo.jpg" alt="logo" className="w-8 lg:block md:w-11" />
@@ -27,15 +25,15 @@ const Navbar = ({ isOpen }) => {
                         <MenuItem icon={<LocalParkingIcon />} component={<Link to="/productlist" />}>
                             Products
                         </MenuItem>
-                        {/* <MenuItem icon={<FactoryIcon />} component={<Link to="/manufacturerlist" />}>
+                        <MenuItem icon={<FactoryIcon />} component={<Link to="/manufacturerlist" />}>
                             Manufacturer
-                        </MenuItem> */}
-                        <SubMenu icon={<FactoryIcon />} label="Manufacturer" >
+                        </MenuItem>
+                        {/* for dropdown */}
+                        {/* <SubMenu icon={<FactoryIcon />} label="Manufacturer" >
                             <MenuItem component={<Link to="/manufacturerlist" />}>Manufacturer List</MenuItem>
                             <MenuItem component={<Link to="/manufacturerview" />}>Manufacturer View</MenuItem>
-                            <MenuItem component={<Link to="/manufactureruploadform" />}>Manufacturer Upload</MenuItem>
-                            <MenuItem component={<Link to="/manufacturer_product_list_upload" />}>Manufacturer Product Upload</MenuItem>
-                        </SubMenu>
+                            <MenuItem component={<Link to="/manufacturerupload" />}>Manufacturer Upload</MenuItem>
+                        </SubMenu> */}
                         <MenuItem icon={<ShoppingCartCheckoutIcon />} component={<Link to="/orders" />}>
                             Orders
                         </MenuItem>
