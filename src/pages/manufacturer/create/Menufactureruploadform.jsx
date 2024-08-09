@@ -8,8 +8,8 @@ const Menufactureruploadform = () => {
     const [selectedCountry, setSelectedCountry] = useState("");
     const [selectedState, setSelectedState] = useState("");
     const [selectedCity, setSelectedCity] = useState("");
-    const [ selectedFile, setSelectedFile] = useState()
-    
+    const [selectedFile, setSelectedFile] = useState();
+
     const [countries, setCountries] = useState([]);
     const [states, setStates] = useState([]);
     const [cities, setCities] = useState([]);
@@ -66,8 +66,9 @@ const Menufactureruploadform = () => {
             values.m_country = selectedCountry;
             values.m_state = selectedState;
             values.m_city = selectedCity;
-            values.m_logo = selectedFile
-            console.log('vshdshdjsjd')
+            values.m_logo = selectedFile;
+            console.log("vshdshdjsjd");
+
             const formData = new FormData();
             Object.keys(values).forEach((key) => {
                 formData.append(key, values[key]);
@@ -85,7 +86,7 @@ const Menufactureruploadform = () => {
     });
 
     const handleUpload = async (event) => {
-        const file = event.target.files[0]
+        const file = event.target.files[0];
 
         const reader = new FileReader();
 
@@ -107,8 +108,7 @@ const Menufactureruploadform = () => {
                 console.error("Upload error", error);
             }
         };
-        // setValues("m_logo", file)
-        setSelectedFile(file)
+        setSelectedFile(file);
     };
 
     return (
@@ -181,7 +181,6 @@ const Menufactureruploadform = () => {
                                 <input
                                     type="text"
                                     name="m_name"
-                                    // value={product.m_name}
                                     value={values.m_name}
                                     onChange={handleChange}
                                     id="first_name"
@@ -200,7 +199,6 @@ const Menufactureruploadform = () => {
                                 <input
                                     type="text"
                                     name="m_c_name"
-                                    // value={product.m_c_name}
                                     value={values.m_c_name}
                                     onChange={handleChange}
                                     id="last_name"

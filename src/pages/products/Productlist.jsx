@@ -8,6 +8,13 @@ import DeleteIcon from "@mui/icons-material/Delete";
 const Productlist = () => {
     const [orders, setOrders] = useState([]);
 
+    const [product, setProduct] = useState({
+        name: "",
+        price: "",
+        seller_id: "",
+        manufacturer_id: "",
+    });
+
     const orderdata = () => {
         axios
             .get("http://192.168.1.4:5000/product/get-products")
@@ -26,6 +33,8 @@ const Productlist = () => {
     useEffect(() => {
         orderdata();
     }, []);
+
+    
 
     return (
         <>
@@ -78,14 +87,6 @@ const Productlist = () => {
                                     </Link>
                                 </div>
                             </li>
-                            {/* <li aria-current="page">
-                                <div className="flex items-center">
-                                    <svg className="rtl:rotate-180 w-3 h-3 text-gray-400 mx-1" aria-hidden="true" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 6 10">
-                                        <path stroke="currentColor" strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="m1 9 4-4-4-4" />
-                                    </svg>
-                                    <span className="ms-1 text-sm font-medium text-gray-500 md:ms-2 dark:text-gray-400">Product upload</span>
-                                </div>
-                            </li> */}
                         </ol>
                     </nav>
                 </div>

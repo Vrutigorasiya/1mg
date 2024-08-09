@@ -33,7 +33,8 @@ const Navbar = ({ isOpen }) => {
                         <SubMenu icon={<FactoryIcon />} label="Manufacturer" >
                             <MenuItem component={<Link to="/manufacturerlist" />}>Manufacturer List</MenuItem>
                             <MenuItem component={<Link to="/manufacturerview" />}>Manufacturer View</MenuItem>
-                            <MenuItem component={<Link to="/manufacturerupload" />}>Manufacturer Upload</MenuItem>
+                            <MenuItem component={<Link to="/manufactureruploadform" />}>Manufacturer Upload</MenuItem>
+                            <MenuItem component={<Link to="/manufacturer_product_list_upload" />}>Manufacturer Product Upload</MenuItem>
                         </SubMenu>
                         <MenuItem icon={<ShoppingCartCheckoutIcon />} component={<Link to="/orders" />}>
                             Orders

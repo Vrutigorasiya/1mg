@@ -1,47 +1,55 @@
-import React, {useState, useRef} from "react";
+import  {useState, useRef} from "react";
 // import HomeIcon from "@mui/icons-material/Home";
-import {Box, Button,  Rating, TextareaAutosize} from "@mui/material";
+import {Box, Rating, TextareaAutosize} from "@mui/material";
 import StarIcon from "@mui/icons-material/Star";
 import {Link} from "react-router-dom";
 import {useFormik} from "formik";
-import {productuploadvalidation} from "../../../validation/Productuploadvalidation";
+import {api} from "../../../api";
 
-const Productcreateform = () => {
-    const [value, setValue] = React.useState(2);
-    const [hover, setHover] = React.useState(-1);
+const Manufacturer_product_upload = () => {
+    // const [value, setValue] = React.useState(2);
+    // const [hover, setHover] = React.useState(-1);
     const [images, setImges] = useState(["", "", "", "", ""]);
 
-   
+    const [selectedFile, setSelectedFile] = useState();
+
     
 
-    const initialValue = {
-        productname: "",
-        productbrand: "",
-        producthighlight: "",
-        productdescription: "",
-        productingredients: "",
-        productbenefits: "",
-        productdirections: "",
-        productstorage: "",
-        productsafety: "",
-        seller_id: "",
-        manufacturer_id: "",
-    };
+    const {values, handleChange, handleSubmit} = useFormik({
+        initialValues: {
+            product_title: "",
+            brand: "",
+            rating: "",
+            rating_count: "",
+            store_type: "",
+            products_type: "",
+            price: "",
+            old_price: "",
+            stock_quantity: "",
+            description: "",
+            seller_id: "",
+            manufacturer_id: "",
+            images: null,
+        },
+        onSubmit: () => {
+            values.images = selectedFile;
 
-    const {values, handleBlur, handleChange, handleSubmit, errors} = useFormik({
-        initialValues: initialValue,
-        validationSchema: productuploadvalidation,
-        onSubmit: (values) => {
+            const formData = new FormData();
+            Object.keys(values).forEach((key) => {
+                formData.append(key, values[key]);
+            });
+            try {
+                const response = api.post("/product/create-products", formData);
+                console.log(response.data);
+            } catch (error) {
+                console.log(error);
+            }
 
-
-           
-            console.log("product create forms", values);
-
-           
+            console.log("product create forms", values); 
         },
     });
-    
 
+    
     const inputRef = useRef(null);
 
     const handleImageclick = () => {
@@ -51,32 +59,59 @@ const Productcreateform = () => {
         const file = e.target.files[0];
         images[index] = file;
         setImges([...images]);
+
+        async (event) => {
+            const file = event.target.files[0];
+    
+            const reader = new FileReader();
+    
+            reader.onloadend = async () => {
+                const binaryData = reader.result;
+    
+                const formData = new FormData();
+                formData.append("image", new Blob([binaryData], {type: file.type}), file.name);
+    
+                try {
+                    const response = await fetch("YOUR_API_ENDPOINT", {
+                        method: "POST",
+                        body: formData,
+                    });
+    
+                    const data = await response.json();
+                    console.log("Upload successful", data);
+                } catch (error) {
+                    console.error("Upload error", error);
+                }
+            };
+            // setValues("m_logo", file)
+            setSelectedFile(file);
+        };
+    
     };
 
+    // const labels = {
+    //     0.5: "0.5",
+    //     1: "1",
+    //     1.5: "1.5",
+    //     2: "2",
+    //     2.5: "2.5",
+    //     3: "3",
+    //     3.5: "3.5",
+    //     4: "4",
+    //     4.5: "4.5",
+    //     5: "5",
+    // };
 
-    const labels = {
-        0.5: "0.5",
-        1: "1",
-        1.5: "1.5",
-        2: "2",
-        2.5: "2.5",
-        3: "3",
-        3.5: "3.5",
-        4: "4",
-        4.5: "4.5",
-        5: "5",
-    };
-
-    function getLabelText(value) {
-        return `${value} Star${value !== 1 ? "s" : ""}, ${labels[value]}`;
-    }
+    // function getLabelText(value) {
+    //     return `${value} Star${value !== 1 ? "s" : ""}, ${labels[value]}`;
+    // }
 
     return (
         <>
             <div className="container mx-auto">
-                <div className="shadow bg-white mt-7 mx-3 rounded-md p-5 block md:flex lg:flex items-center justify-between">
+                <div className="shadow-xl bg-white mt-7 mx-3 rounded-xl p-5 block md:flex lg:flex items-center justify-between">
                     <div className=" ">
-                        <h5 className="text-lg font-medium">Product Upload</h5>
+                        <h5 className="text-lg font-medium"> Product Create</h5>
                     </div>
                     <nav className="flex" aria-label="Breadcrumb">
                         <ol className="inline-flex items-center space-x-1 md:space-x-2 rtl:space-x-reverse">
@@ -118,7 +153,7 @@ const Productcreateform = () => {
                                         to="#"
                                         className="ms-1 text-sm font-medium text-gray-700 hover:text-blue-600 md:ms-2 dark:text-gray-400 dark:hover:text-white"
                                     >
-                                        Products
+                                        Manufacturer List
                                     </Link>
                                 </div>
                             </li>
@@ -140,7 +175,7 @@ const Productcreateform = () => {
                                         />
                                     </svg>
                                     <span className="ms-1 text-sm font-medium text-gray-500 md:ms-2 dark:text-gray-400">
-                                        Product upload
+                                        Manufacrurer Product upload
                                     </span>
                                 </div>
                             </li>
@@ -148,16 +183,15 @@ const Productcreateform = () => {
                     </nav>
                 </div>
                 <form onSubmit={handleSubmit}>
-                    <div className="shadow bg-white mt-7 mx-3 rounded-md p-5">
+                    <div className="shadow-xl bg-white mt-7 mx-3 rounded-xl p-5">
                         <h5 className="text-lg font-medium py-4">Basic Information</h5>
                         <div className="block lg:flex md:flex gap-5">
                             <div className="w-full md:w-1/2 lg:w1/2 ">
                                 <label className="uppercase text-xs">product name</label>
                                 <input
                                     type="text"
-                                    name="productname"
-                                    value={values.productname}
-                                    onBlur={handleBlur}
+                                    name="product_title"
+                                    value={values.product_title}
                                     onChange={handleChange}
                                     className="rounded w-full mt-1 outline-none text-sm p-3"
                                     style={{
@@ -165,15 +199,13 @@ const Productcreateform = () => {
                                         border: "1px solid #0000001a",
                                     }}
                                 ></input>
-                                {errors.productname && <small>{errors.productname}</small>}
                             </div>
                             <div className="w-full md:w-1/2 lg:w1/2">
                                 <label className="uppercase text-xs">brand name</label>
                                 <input
                                     type="text"
-                                    name="productbrand"
-                                    value={values.productbrand}
-                                    onBlur={handleBlur}
+                                    name="brand"
+                                    value={values.brand}
                                     onChange={handleChange}
                                     className="rounded w-full mt-1 outline-none text-sm p-3"
                                     style={{
@@ -181,33 +213,27 @@ const Productcreateform = () => {
                                         border: "1px solid #0000001a",
                                     }}
                                 ></input>
-                                {errors.productbrand && <small>{errors.productbrand}</small>}
                             </div>
                         </div>
 
                         <div>
-                            <label className="uppercase text-xs mt-5">product highlights</label>
-                            <TextareaAutosize
-                                type="text"
-                                name="producthighlight"
-                                value={values.producthighlight}
-                                onBlur={handleBlur}
+                            <label className="uppercase text-xs mt-5">Stock Quantity</label>
+                            <input
+                                type="number"
+                                name="stock_quantity"
+                                value={values.stock_quantity}
                                 onChange={handleChange}
-                                aria-label="minimum height"
-                                minRows={3}
-                                className="rounded outline-none mt-1 w-full"
+                                className="rounded outline-none mt-1 w-full p-3"
                                 style={{backgroundColor: "#fafafa", border: "1px solid #0000001a"}}
                             />
                         </div>
 
-                        {errors.producthighlight && <small>{errors.producthighlight}</small>}
                         <div>
                             <label className="uppercase text-xs mt-5">description</label>
                             <TextareaAutosize
                                 type="text"
-                                name="productdescription"
-                                value={values.productdescription}
-                                onBlur={handleBlur}
+                                name="description"
+                                value={values.description}
                                 onChange={handleChange}
                                 aria-label="minimum height"
                                 minRows={3}
@@ -215,102 +241,84 @@ const Productcreateform = () => {
                                 style={{backgroundColor: "#fafafa", border: "1px solid #0000001a"}}
                             />
                         </div>
-
-                        {errors.productdescription && <small>{errors.productdescription}</small>}
-                        <div>
-                            <label className="uppercase text-xs mt-5">Ingredients</label>
-                            <TextareaAutosize
-                                type="text"
-                                name="productingredients"
-                                value={values.productingredients}
-                                onBlur={handleBlur}
-                                onChange={handleChange}
-                                aria-label="minimum height"
-                                minRows={3}
-                                className="rounded outline-none mt-1 w-full"
-                                style={{backgroundColor: "#fafafa", border: "1px solid #0000001a"}}
-                            />
-                        </div>
-
-                        {errors.productingredients && <small>{errors.productingredients}</small>}
-                        <div>
-                            <label className="uppercase text-xs mt-5">Benefits</label>
-                            <TextareaAutosize
-                                type="text"
-                                name="productbenefits"
-                                value={values.productbenefits}
-                                onBlur={handleBlur}
-                                onChange={handleChange}
-                                aria-label="minimum height"
-                                minRows={3}
-                                className="rounded outline-none mt-1 w-full"
-                                style={{backgroundColor: "#fafafa", border: "1px solid #0000001a"}}
-                            />
-                        </div>
-                        {errors.productbenefits && <small>{errors.productbenefits}</small>}
-                        <div>
-                            <label className="uppercase text-xs mt-5">directions for use</label>
-                            <TextareaAutosize
-                                type="text"
-                                name="productdirections"
-                                value={values.productdirections}
-                                onBlur={handleBlur}
-                                onChange={handleChange}
-                                aria-label="minimum height"
-                                minRows={2}
-                                className="rounded outline-none mt-1 w-full"
-                                style={{backgroundColor: "#fafafa", border: "1px solid #0000001a"}}
-                            />
-                        </div>
-                        {errors.productdirections && <small>{errors.productdirections}</small>}
-                        <div>
-                            <label className="uppercase text-xs mt-5">storage instruction</label>
-                            <TextareaAutosize
-                                type="text"
-                                name="productstorage"
-                                value={values.productstorage}
-                                onBlur={handleBlur}
-                                onChange={handleChange}
-                                aria-label="minimum height"
-                                minRows={2}
-                                className="rounded outline-none mt-1 w-full"
-                                style={{backgroundColor: "#fafafa", border: "1px solid #0000001a"}}
-                            />
-                        </div>
-                        {errors.productstorage && <small>{errors.productstorage}</small>}
-                        <div>
-                            <label className="uppercase text-xs mt-5">safety warning</label>
-                            <TextareaAutosize
-                                type="text"
-                                name="productsafety"
-                                value={values.productsafety}
-                                onBlur={handleBlur}
-                                onChange={handleChange}
-                                aria-label="minimum height"
-                                minRows={2}
-                                className="rounded outline-none mt-1 w-full"
-                                style={{backgroundColor: "#fafafa", border: "1px solid #0000001a"}}
-                            />
-                        </div>
-                        {errors.productsafety && <small>{errors.productsafety}</small>}
                     </div>
-                    <div className="shadow bg-white mt-7 mx-3 rounded-md p-5">
+                    <div className="shadow-xl bg-white mt-7 mx-3 rounded-xl p-5 ">
                         <h5 className="text-lg font-medium py-4">Additional Information</h5>
+                        <div className="block lg:flex md:flex gap-5 mb-5">
+                            <div className="w-full md:w-1/2 lg:w1/2 ">
+                                <label className="uppercase text-xs">Price</label>
+                                <input
+                                    type="number"
+                                    name="price"
+                                    value={values.price}
+                                    onChange={handleChange}
+                                    className="rounded w-full mt-1 outline-none text-sm p-3"
+                                    style={{
+                                        backgroundColor: "#fafafa",
+                                        border: "1px solid #0000001a",
+                                    }}
+                                ></input>
+                            </div>
+                            <div className="w-full md:w-1/2 lg:w1/2">
+                                <label className="uppercase text-xs">Old Price</label>
+                                <input
+                                    type="number"
+                                    name="old_price"
+                                    value={values.old_price}
+                                    onChange={handleChange}
+                                    className="rounded w-full mt-1 outline-none text-sm p-3"
+                                    style={{
+                                        backgroundColor: "#fafafa",
+                                        border: "1px solid #0000001a",
+                                    }}
+                                ></input>
+                            </div>
+                        </div>
+                        <div className="block lg:flex md:flex gap-5 mb-5">
+                            <div className="w-full md:w-1/2 lg:w1/2 ">
+                                <label className="uppercase text-xs">Seller ID</label>
+                                <input
+                                    type="number"
+                                    name="seller_id"
+                                    value={values.seller_id}
+                                    onChange={handleChange}
+                                    className="rounded w-full mt-1 outline-none text-sm p-3"
+                                    style={{
+                                        backgroundColor: "#fafafa",
+                                        border: "1px solid #0000001a",
+                                    }}
+                                ></input>
+                            </div>
+                            <div className="w-full md:w-1/2 lg:w1/2">
+                                <label className="uppercase text-xs">Manufacturer ID</label>
+                                <input
+                                    type="number"
+                                    name="manufacturer_id"
+                                    value={values.manufacturer_id}
+                                    onChange={handleChange}
+                                    className="rounded w-full mt-1 outline-none text-sm p-3"
+                                    style={{
+                                        backgroundColor: "#fafafa",
+                                        border: "1px solid #0000001a",
+                                    }}
+                                ></input>
+                            </div>
+                        </div>
                         <div className="flex gap-5">
                             <div className="w-full md:w-1/2 lg:w-1/2">
-                                
                                 <label
                                     htmlFor="countries"
                                     className="block mb-2 text-sm font-medium text-gray-900 dark:text-white"
                                 >
-                                    Seller
+                                    Product Type
                                 </label>
                                 <select
                                     id="countries"
                                     className="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500"
                                     type="select"
-                                    name="productname"
-                                    
+                                    name="products_type"
+                                    value={values.products_type}
+                                    onChange={handleChange}
                                 >
                                     <option selected>Choose a country</option>
                                     <option value="US">United States</option>
@@ -320,19 +328,19 @@ const Productcreateform = () => {
                                 </select>
                             </div>
                             <div className="w-full md:w-1/2 lg:w-1/2">
-                                
                                 <label
                                     htmlFor="countries"
                                     className="block mb-2 text-sm font-medium text-gray-900 dark:text-white"
                                 >
-                                    Manufacturer
+                                    Store Type
                                 </label>
                                 <select
                                     id="manufacturer"
                                     className="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500"
                                     type="select"
-                                    name="manufacturer_id"
-                                    
+                                    name="store_type"
+                                    value={values.store_type}
+                                    onChange={handleChange}
                                 >
                                     <option selected>Choose a country</option>
                                     <option value="US">United States</option>
@@ -342,43 +350,59 @@ const Productcreateform = () => {
                                 </select>
                             </div>
                         </div>
-
-                        <div className="mt-5">
-                            <label className="uppercase text-xs">product rating</label>
-                            <Box
-                                sx={{
-                                    width: 200,
-                                    display: "flex",
-                                    alignItems: "center",
-                                }}
-                            >
-                                <Rating
-                                    name="hover-feedback"
-                                    value={value}
-                                    precision={0.5}
-                                    getLabelText={getLabelText}
-                                    onChange={(event, newValue) => {
-                                        setValue(newValue);
+                        <div className="flex gap-5">
+                            <div className="w-full md:w-1/2 lg:w-1/2 mt-7">
+                                <label
+                                    className="text-slate-400 "
+                                    type="select"
+                                    name="rating_count"
+                                    value={values.rating_count}
+                                    onChange={handleChange}
+                                >
+                                    {" "}
+                                    O Ratings & 0 Reviews
+                                </label>
+                            </div>
+                            {/* <div className="w-full md:w-1/2 lg:w-1/2 mt-3">
+                                <label className="uppercase text-xs">product rating</label>
+                                <Box
+                                    sx={{
+                                        width: 200,
+                                        display: "flex",
+                                        alignItems: "center",
                                     }}
-                                    onChangeActive={(event, newHover) => {
-                                        setHover(newHover);
-                                    }}
-                                    emptyIcon={
-                                        <StarIcon style={{opacity: 0.55}} fontSize="inherit" />
-                                    }
-                                />
-                                {value !== null && (
-                                    <Box sx={{ml: 2}}>{labels[hover !== -1 ? hover : value]}</Box>
-                                )}
-                            </Box>
+                                >
+                                    <Rating
+                                        type="number"
+                                        name="hover-feedback"
+                                        value={values}
+                                        precision={0.5}
+                                        getLabelText={getLabelText}
+                                        onChange={(event, newValue) => {
+                                            setValue(newValue);
+                                        }}
+                                        onChangeActive={(event, newHover) => {
+                                            setHover(newHover);
+                                        }}
+                                        emptyIcon={
+                                            <StarIcon style={{opacity: 0.55}} fontSize="inherit" />
+                                        }
+                                    />
+                                    {value !== null && (
+                                        <Box sx={{ml: 2}}>
+                                            {labels[hover !== -1 ? hover : value]}
+                                        </Box>
+                                    )}
+                                </Box>
+                            </div> */}
                         </div>
                     </div>
 
-                    <div className="shadow bg-white mt-7 mx-3 rounded-md p-5 mb-3">
+                    <div className="shadow-xl bg-white mt-7 mx-3 rounded-xl p-5 mb-3">
                         <h5 className="text-lg font-medium py-4">Product Images</h5>
 
                         <div className="flex gap-3 flex-wrap justify-evenly lg:flex-nowrap ">
-                            {images?.map((item, index) => (
+                        {images?.map((item, index) => (
                                 <div
                                     key={index}
                                     className="relative max-w-[200px] w-full h-[200px] "
@@ -410,12 +434,12 @@ const Productcreateform = () => {
                         </div>
 
                         <div className="mt-3">
-                            <Button
+                            <button
                                 type="submit"
-                                className="text-white bg-blue-700 hover:bg-blue-800 focus:ring-4 focus:ring-blue-300 font-medium rounded-lg text-sm px-5 py-2.5 me-2 mb-2 dark:bg-blue-600 dark:hover:bg-blue-700 focus:outline-none dark:focus:ring-blue-800 w-full mt-5 uppercase"
+                                className="text-white bg-blue-700 hover:bg-blue-800 focus:ring-4 focus:ring-blue-300 font-medium rounded-lg text-sm px-5 py-2.5 me-2 dark:bg-blue-600 dark:hover:bg-blue-700 focus:outline-none dark:focus:ring-blue-800 w-full mt-5 uppercase mb-5"
                             >
                                 submit
-                            </Button>
+                            </button>
                         </div>
                     </div>
                 </form>
@@ -424,4 +448,4 @@ const Productcreateform = () => {
     );
 };
 
-export default Productcreateform;
+export default Manufacturer_product_upload;
