@@ -99,7 +99,6 @@ const Menufactureruploadform = () => {
 
             const formData = new FormData();
             formData.append("image", new Blob([binaryData], { type: file.type }), file.name);
-
             try {
                 const response = await fetch("YOUR_API_ENDPOINT", {
                     method: "POST",

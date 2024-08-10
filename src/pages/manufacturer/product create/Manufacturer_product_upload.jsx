@@ -1,41 +1,44 @@
-import  {useState, useRef} from "react";
+import {useState} from "react";
 // import HomeIcon from "@mui/icons-material/Home";
-import {Box, Rating, TextareaAutosize} from "@mui/material";
-import StarIcon from "@mui/icons-material/Star";
+import {Rating, TextareaAutosize} from "@mui/material";
 import {Link} from "react-router-dom";
 import {useFormik} from "formik";
 import {api} from "../../../api";
 
 const Manufacturer_product_upload = () => {
-    // const [value, setValue] = React.useState(2);
-    // const [hover, setHover] = React.useState(-1);
-    const [images, setImges] = useState(["", "", "", "", ""]);
-
-    const [selectedFile, setSelectedFile] = useState();
-
-    
+    const [files, setFiles] = useState([]);
+    const [stars, setStars] = useState(0);
 
     const {values, handleChange, handleSubmit} = useFormik({
         initialValues: {
             product_title: "",
             brand: "",
             rating: "",
-            rating_count: "",
+            rating_count: 0,
             store_type: "",
             products_type: "",
             price: "",
             old_price: "",
             stock_quantity: "",
             description: "",
-            seller_id: "",
-            manufacturer_id: "",
-            images: null,
+            seller_id: 10,
+            manufacturer_id: 45,
+            images: [],
         },
         onSubmit: () => {
-            values.images = selectedFile;
+            values.images = files;
+            values.rating_count = stars;
+            console.log("values nmjfhf", values);
 
             const formData = new FormData();
+
             Object.keys(values).forEach((key) => {
+                if (key === "images") {
+                    console.log("sdnsnd", values[key]);
+                    for (let i = 0; i < files.length; i++) {
+                        formData.append(`file${i + 1}`, files[i]);
+                    }
+                }
                 formData.append(key, values[key]);
             });
             try {
@@ -44,67 +47,29 @@ const Manufacturer_product_upload = () => {
             } catch (error) {
                 console.log(error);
             }
-
-            console.log("product create forms", values); 
         },
     });
-
-    
-    const inputRef = useRef(null);
-
-    const handleImageclick = () => {
-        inputRef.current.click();
-    };
-    const handleImagechange = (e, index) => {
-        const file = e.target.files[0];
-        images[index] = file;
-        setImges([...images]);
-
-        async (event) => {
-            const file = event.target.files[0];
-    
+    const convertToBinary = (file) => {
+        return new Promise((resolve, reject) => {
             const reader = new FileReader();
-    
-            reader.onloadend = async () => {
-                const binaryData = reader.result;
-    
-                const formData = new FormData();
-                formData.append("image", new Blob([binaryData], {type: file.type}), file.name);
-    
-                try {
-                    const response = await fetch("YOUR_API_ENDPOINT", {
-                        method: "POST",
-                        body: formData,
-                    });
-    
-                    const data = await response.json();
-                    console.log("Upload successful", data);
-                } catch (error) {
-                    console.error("Upload error", error);
-                }
-            };
-            // setValues("m_logo", file)
-            setSelectedFile(file);
-        };
-    
+            reader.readAsArrayBuffer(file);
+            reader.onload = () => resolve(reader.result);
+            reader.onerror = (error) => reject(error);
+        });
     };
+    console.log("fdwed", files);
+    const handleFileChange = async (event) => {
+        const selectedFiles = event.target.files;
+        const binaryFiles = [];
+        for (let i = 0; i < selectedFiles.length; i++) {
+            const file = selectedFiles[i];
+            const binary = await convertToBinary(file);
+            binaryFiles.push({name: file.name, binary});
+        }
 
-    // const labels = {
-    //     0.5: "0.5",
-    //     1: "1",
-    //     1.5: "1.5",
-    //     2: "2",
-    //     2.5: "2.5",
-    //     3: "3",
-    //     3.5: "3.5",
-    //     4: "4",
-    //     4.5: "4.5",
-    //     5: "5",
-    // };
-
-    // function getLabelText(value) {
-    //     return `${value} Star${value !== 1 ? "s" : ""}, ${labels[value]}`;
-    // }
+        console.log("fdwed", binaryFiles);
+        setFiles(binaryFiles);
+    };
 
     return (
         <>
@@ -350,87 +315,28 @@ const Manufacturer_product_upload = () => {
                                 </select>
                             </div>
                         </div>
-                        <div className="flex gap-5">
-                            <div className="w-full md:w-1/2 lg:w-1/2 mt-7">
-                                <label
-                                    className="text-slate-400 "
-                                    type="select"
-                                    name="rating_count"
-                                    value={values.rating_count}
-                                    onChange={handleChange}
-                                >
-                                    {" "}
-                                    O Ratings & 0 Reviews
+                        <div className="lg:flex block gap-5">
+                            <div className="w-full md:w-1/2 lg:w-1/2 mt-7 flex">
+                                <label className="ms-1 text-sm font-medium text-dark-500 md:ms-2 dark:text-gray-400">
+                                    Ratings & Reviews:-
                                 </label>
+                                <input
+                                    type="number"
+                                    name="rating"
+                                    value={values.rating}
+                                    onChange={handleChange}
+                                />
                             </div>
-                            {/* <div className="w-full md:w-1/2 lg:w-1/2 mt-3">
-                                <label className="uppercase text-xs">product rating</label>
-                                <Box
-                                    sx={{
-                                        width: 200,
-                                        display: "flex",
-                                        alignItems: "center",
-                                    }}
-                                >
-                                    <Rating
-                                        type="number"
-                                        name="hover-feedback"
-                                        value={values}
-                                        precision={0.5}
-                                        getLabelText={getLabelText}
-                                        onChange={(event, newValue) => {
-                                            setValue(newValue);
-                                        }}
-                                        onChangeActive={(event, newHover) => {
-                                            setHover(newHover);
-                                        }}
-                                        emptyIcon={
-                                            <StarIcon style={{opacity: 0.55}} fontSize="inherit" />
-                                        }
-                                    />
-                                    {value !== null && (
-                                        <Box sx={{ml: 2}}>
-                                            {labels[hover !== -1 ? hover : value]}
-                                        </Box>
-                                    )}
-                                </Box>
-                            </div> */}
+                            <div className="w-full md:w-1/2 lg:w-1/2 mt-3">
+                                <Rating name="size-medium" value={stars} onChange={(_, newValue) => setStars(newValue)} />
+                            </div>
                         </div>
                     </div>
 
                     <div className="shadow-xl bg-white mt-7 mx-3 rounded-xl p-5 mb-3">
                         <h5 className="text-lg font-medium py-4">Product Images</h5>
-
-                        <div className="flex gap-3 flex-wrap justify-evenly lg:flex-nowrap ">
-                        {images?.map((item, index) => (
-                                <div
-                                    key={index}
-                                    className="relative max-w-[200px] w-full h-[200px] "
-                                >
-                                    {images[index] ? (
-                                        <img
-                                            src={URL.createObjectURL(images[index])}
-                                            id="profile-pic"
-                                            className="w-full h-full object-contain border-2 rounded-md border-dashed border-gray-300"
-                                            onClick={handleImageclick}
-                                            alt={`profile-pic-${index}`}
-                                        />
-                                    ) : (
-                                        <img
-                                            src="https://cdn.pixabay.com/photo/2015/10/05/22/37/blank-profile-picture-973460_960_720.png"
-                                            id="profile-pic"
-                                            className="w-full h-full object-cover border-2 rounded-md border-dashed border-gray-300"
-                                            alt="default-profile-pic"
-                                        />
-                                    )}
-                                    <input
-                                        type="file"
-                                        ref={inputRef}
-                                        onChange={(e) => handleImagechange(e, index)}
-                                        className="opacity-0 absolute inset-0 z-20"
-                                    />
-                                </div>
-                            ))}
+                        <div>
+                            <input type="file" multiple name="images" onChange={handleFileChange} />
                         </div>
 
                         <div className="mt-3">

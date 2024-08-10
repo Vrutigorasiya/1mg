@@ -13,6 +13,7 @@ import Productview from "./pages/products/view/Productview";
 import Productcreateform from "./pages/products/create/Productcreateform";
 import Menufactureruploadform from "./pages/manufacturer/create/Menufactureruploadform";
 import Manufacturer_product_upload from "./pages/manufacturer/product create/Manufacturer_product_upload";
+import Adminprofile from "./pages/profile/Adminprofile";
 
 
 function App() {
