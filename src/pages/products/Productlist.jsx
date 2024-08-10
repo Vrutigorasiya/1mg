@@ -10,12 +10,7 @@ const Productlist = () => {
     const [orders, setOrders] = useState([]);
     const [search, setSearch] = useState("");
 
-    const [product, setProduct] = useState({
-        name: "",
-        price: "",
-        seller_id: "",
-        manufacturer_id: "",
-    });
+    console.log(orders, "ordersss");
 
     const searchinput = async () => {
         await axios
@@ -186,7 +181,7 @@ const Productlist = () => {
                                             <td className="px-2 py-2 border-r border-gray-300 text-center">${value.product_price}</td>
                                             <td className="px-2 py-2 border-r border-gray-300 text-center">{value.product_stock_quantity}</td>
                                             <td className="px-2 py-2 border-r border-gray-300">
-                                                <img src={`${baseURL}${value.product_images}`} alt="abc" className="w-12 h-12 object-cover" />
+                                                <img src={`${baseURL}${value.product_images_path[0]}`} alt="abc" className="w-12 h-12 object-cover block mx-auto" />
                                             </td>
                                             <td className="px-2 py-2 border-r border-gray-300">{value.seller_company_name}</td>
                                             <td className="px-2 py-2 border-r border-gray-300">{value.m_name}</td>

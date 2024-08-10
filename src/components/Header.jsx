@@ -35,16 +35,18 @@ const Header = ({ isOpen, onSidebarToggle }) => {
                     <MenuItem icon={<DashboardIcon />} component={<Link to="/dashboard" />}>
                         Dashboard
                     </MenuItem>
-                    <SubMenu label="Products" icon={<LocalParkingIcon />}>
-                        <MenuItem component={<Link to="/productlist" />}>Product List</MenuItem>
-                        <MenuItem component={<Link to="/productview" />}>Product View</MenuItem>
-                        <MenuItem component={<Link to="/productupload" />}>Product Upload</MenuItem>
-                    </SubMenu>
-                    <SubMenu label="Manufacturer" icon={<FactoryIcon />}>
-                        <MenuItem component={<Link to="/manufacturerlist" />}>Manufacturer List</MenuItem>
-                        <MenuItem component={<Link to="/manufacturerview" />}>Manufacturer View</MenuItem>
-                        <MenuItem component={<Link to="/manufacturerupload" />}>Manufacturer Upload</MenuItem>
-                    </SubMenu>
+                    <MenuItem icon={<LocalParkingIcon />} component={<Link to="/productlist" />}>
+                        Products
+                    </MenuItem>
+                    <MenuItem icon={<FactoryIcon />} component={<Link to="/manufacturerlist" />}>
+                        Manufacturer
+                    </MenuItem>
+                    {/* for dropdown */}
+                    {/* <SubMenu icon={<FactoryIcon />} label="Manufacturer" >
+                            <MenuItem component={<Link to="/manufacturerlist" />}>Manufacturer List</MenuItem>
+                            <MenuItem component={<Link to="/manufacturerview" />}>Manufacturer View</MenuItem>
+                            <MenuItem component={<Link to="/manufacturerupload" />}>Manufacturer Upload</MenuItem>
+                        </SubMenu> */}
                     <MenuItem icon={<ShoppingCartCheckoutIcon />} component={<Link to="/orders" />}>
                         Orders
                     </MenuItem>
