@@ -1,5 +1,4 @@
 import {useState} from "react";
-// import HomeIcon from "@mui/icons-material/Home";
 import {Rating, TextareaAutosize} from "@mui/material";
 import {Link} from "react-router-dom";
 import {useFormik} from "formik";
@@ -26,20 +25,18 @@ const Manufacturer_product_upload = () => {
             images: [],
         },
         onSubmit: () => {
-            values.images = files;
             values.rating_count = stars;
-            console.log("values nmjfhf", values);
 
             const formData = new FormData();
 
             Object.keys(values).forEach((key) => {
                 if (key === "images") {
-                    console.log("sdnsnd", values[key]);
                     for (let i = 0; i < files.length; i++) {
-                        formData.append(`file${i + 1}`, files[i]);
+                        formData.append(`images[${i}]`, files[i]);
                     }
+                } else {
+                    formData.append(key, values[key]);
                 }
-                formData.append(key, values[key]);
             });
             try {
                 const response = api.post("/product/create-products", formData);
@@ -49,26 +46,11 @@ const Manufacturer_product_upload = () => {
             }
         },
     });
-    const convertToBinary = (file) => {
-        return new Promise((resolve, reject) => {
-            const reader = new FileReader();
-            reader.readAsArrayBuffer(file);
-            reader.onload = () => resolve(reader.result);
-            reader.onerror = (error) => reject(error);
-        });
-    };
-    console.log("fdwed", files);
+    
     const handleFileChange = async (event) => {
         const selectedFiles = event.target.files;
-        const binaryFiles = [];
-        for (let i = 0; i < selectedFiles.length; i++) {
-            const file = selectedFiles[i];
-            const binary = await convertToBinary(file);
-            binaryFiles.push({name: file.name, binary});
-        }
-
-        console.log("fdwed", binaryFiles);
-        setFiles(binaryFiles);
+       
+        setFiles(selectedFiles);
     };
 
     return (
@@ -328,7 +310,11 @@ const Manufacturer_product_upload = () => {
                                 />
                             </div>
                             <div className="w-full md:w-1/2 lg:w-1/2 mt-3">
-                                <Rating name="size-medium" value={stars} onChange={(_, newValue) => setStars(newValue)} />
+                                <Rating
+                                    name="size-medium"
+                                    value={stars}
+                                    onChange={(_, newValue) => setStars(newValue)}
+                                />
                             </div>
                         </div>
                     </div>

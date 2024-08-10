@@ -1,18 +1,20 @@
-import React, {useState, useRef} from "react";
+import React, { useState, useRef, useEffect } from "react";
 // import HomeIcon from "@mui/icons-material/Home";
-import {Box, Button,  Rating, TextareaAutosize} from "@mui/material";
+import { Box, Button, Rating, TextareaAutosize } from "@mui/material";
 import StarIcon from "@mui/icons-material/Star";
-import {Link} from "react-router-dom";
-import {useFormik} from "formik";
-import {productuploadvalidation} from "../../../validation/Productuploadvalidation";
+import { Link } from "react-router-dom";
+import { useFormik } from "formik";
+import { productuploadvalidation } from "../../../validation/Productuploadvalidation";
 
 const Productcreateform = () => {
+    const eleemntref = useRef();
+    useEffect(() => {
+        eleemntref.current && eleemntref.current.scrollIntoView();
+    }, []);
+
     const [value, setValue] = React.useState(2);
     const [hover, setHover] = React.useState(-1);
     const [images, setImges] = useState(["", "", "", "", ""]);
-
-   
-    
 
     const initialValue = {
         productname: "",
@@ -28,19 +30,13 @@ const Productcreateform = () => {
         manufacturer_id: "",
     };
 
-    const {values, handleBlur, handleChange, handleSubmit, errors} = useFormik({
+    const { values, handleBlur, handleChange, handleSubmit, errors } = useFormik({
         initialValues: initialValue,
         validationSchema: productuploadvalidation,
         onSubmit: (values) => {
-
-
-           
             console.log("product create forms", values);
-
-           
         },
     });
-    
 
     const inputRef = useRef(null);
 
@@ -80,17 +76,8 @@ const Productcreateform = () => {
                     <nav className="flex" aria-label="Breadcrumb">
                         <ol className="inline-flex items-center space-x-1 md:space-x-2 rtl:space-x-reverse">
                             <li className="inline-flex items-center">
-                                <Link
-                                    to="/dashboard"
-                                    className="inline-flex items-center text-sm font-medium text-gray-700 hover:text-blue-600 dark:text-gray-400 dark:hover:text-white"
-                                >
-                                    <svg
-                                        className="w-3 h-3 me-2.5"
-                                        aria-hidden="true"
-                                        xmlns="http://www.w3.org/2000/svg"
-                                        fill="currentColor"
-                                        viewBox="0 0 20 20"
-                                    >
+                                <Link to="/dashboard" className="inline-flex items-center text-sm font-medium text-gray-700 hover:text-blue-600 dark:text-gray-400 dark:hover:text-white">
+                                    <svg className="w-3 h-3 me-2.5" aria-hidden="true" xmlns="http://www.w3.org/2000/svg" fill="currentColor" viewBox="0 0 20 20">
                                         <path d="m19.707 9.293-2-2-7-7a1 1 0 0 0-1.414 0l-7 7-2 2a1 1 0 0 0 1.414 1.414L2 10.414V18a2 2 0 0 0 2 2h3a1 1 0 0 0 1-1v-4a1 1 0 0 1 1-1h2a1 1 0 0 1 1 1v4a1 1 0 0 0 1 1h3a2 2 0 0 0 2-2v-7.586l.293.293a1 1 0 0 0 1.414-1.414Z" />
                                     </svg>
                                     Dashboard
@@ -98,49 +85,20 @@ const Productcreateform = () => {
                             </li>
                             <li>
                                 <div className="flex items-center">
-                                    <svg
-                                        className="rtl:rotate-180 w-3 h-3 text-gray-400 mx-1"
-                                        aria-hidden="true"
-                                        xmlns="http://www.w3.org/2000/svg"
-                                        fill="none"
-                                        viewBox="0 0 6 10"
-                                    >
-                                        <path
-                                            stroke="currentColor"
-                                            strokeLinecap="round"
-                                            strokeLinejoin="round"
-                                            strokeWidth="2"
-                                            d="m1 9 4-4-4-4"
-                                        />
+                                    <svg className="rtl:rotate-180 w-3 h-3 text-gray-400 mx-1" aria-hidden="true" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 6 10">
+                                        <path stroke="currentColor" strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="m1 9 4-4-4-4" />
                                     </svg>
-                                    <Link
-                                        to="#"
-                                        className="ms-1 text-sm font-medium text-gray-700 hover:text-blue-600 md:ms-2 dark:text-gray-400 dark:hover:text-white"
-                                    >
+                                    <Link to="#" className="ms-1 text-sm font-medium text-gray-700 hover:text-blue-600 md:ms-2 dark:text-gray-400 dark:hover:text-white">
                                         Products
                                     </Link>
                                 </div>
                             </li>
                             <li aria-current="page">
                                 <div className="flex items-center">
-                                    <svg
-                                        className="rtl:rotate-180 w-3 h-3 text-gray-400 mx-1"
-                                        aria-hidden="true"
-                                        xmlns="http://www.w3.org/2000/svg"
-                                        fill="none"
-                                        viewBox="0 0 6 10"
-                                    >
-                                        <path
-                                            stroke="currentColor"
-                                            strokeLinecap="round"
-                                            strokeLinejoin="round"
-                                            strokeWidth="2"
-                                            d="m1 9 4-4-4-4"
-                                        />
+                                    <svg className="rtl:rotate-180 w-3 h-3 text-gray-400 mx-1" aria-hidden="true" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 6 10">
+                                        <path stroke="currentColor" strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="m1 9 4-4-4-4" />
                                     </svg>
-                                    <span className="ms-1 text-sm font-medium text-gray-500 md:ms-2 dark:text-gray-400">
-                                        Product upload
-                                    </span>
+                                    <span className="ms-1 text-sm font-medium text-gray-500 md:ms-2 dark:text-gray-400">Product upload</span>
                                 </div>
                             </li>
                         </ol>
@@ -195,7 +153,7 @@ const Productcreateform = () => {
                                 aria-label="minimum height"
                                 minRows={3}
                                 className="rounded outline-none mt-1 w-full"
-                                style={{backgroundColor: "#fafafa", border: "1px solid #0000001a"}}
+                                style={{ backgroundColor: "#fafafa", border: "1px solid #0000001a" }}
                             />
                         </div>
 
@@ -211,7 +169,7 @@ const Productcreateform = () => {
                                 aria-label="minimum height"
                                 minRows={3}
                                 className="rounded outline-none mt-1 w-full"
-                                style={{backgroundColor: "#fafafa", border: "1px solid #0000001a"}}
+                                style={{ backgroundColor: "#fafafa", border: "1px solid #0000001a" }}
                             />
                         </div>
 
@@ -227,7 +185,7 @@ const Productcreateform = () => {
                                 aria-label="minimum height"
                                 minRows={3}
                                 className="rounded outline-none mt-1 w-full"
-                                style={{backgroundColor: "#fafafa", border: "1px solid #0000001a"}}
+                                style={{ backgroundColor: "#fafafa", border: "1px solid #0000001a" }}
                             />
                         </div>
 
@@ -243,7 +201,7 @@ const Productcreateform = () => {
                                 aria-label="minimum height"
                                 minRows={3}
                                 className="rounded outline-none mt-1 w-full"
-                                style={{backgroundColor: "#fafafa", border: "1px solid #0000001a"}}
+                                style={{ backgroundColor: "#fafafa", border: "1px solid #0000001a" }}
                             />
                         </div>
                         {errors.productbenefits && <small>{errors.productbenefits}</small>}
@@ -258,7 +216,7 @@ const Productcreateform = () => {
                                 aria-label="minimum height"
                                 minRows={2}
                                 className="rounded outline-none mt-1 w-full"
-                                style={{backgroundColor: "#fafafa", border: "1px solid #0000001a"}}
+                                style={{ backgroundColor: "#fafafa", border: "1px solid #0000001a" }}
                             />
                         </div>
                         {errors.productdirections && <small>{errors.productdirections}</small>}
@@ -273,7 +231,7 @@ const Productcreateform = () => {
                                 aria-label="minimum height"
                                 minRows={2}
                                 className="rounded outline-none mt-1 w-full"
-                                style={{backgroundColor: "#fafafa", border: "1px solid #0000001a"}}
+                                style={{ backgroundColor: "#fafafa", border: "1px solid #0000001a" }}
                             />
                         </div>
                         {errors.productstorage && <small>{errors.productstorage}</small>}
@@ -288,7 +246,7 @@ const Productcreateform = () => {
                                 aria-label="minimum height"
                                 minRows={2}
                                 className="rounded outline-none mt-1 w-full"
-                                style={{backgroundColor: "#fafafa", border: "1px solid #0000001a"}}
+                                style={{ backgroundColor: "#fafafa", border: "1px solid #0000001a" }}
                             />
                         </div>
                         {errors.productsafety && <small>{errors.productsafety}</small>}
@@ -297,11 +255,7 @@ const Productcreateform = () => {
                         <h5 className="text-lg font-medium py-4">Additional Information</h5>
                         <div className="flex gap-5">
                             <div className="w-full md:w-1/2 lg:w-1/2">
-                                
-                                <label
-                                    htmlFor="countries"
-                                    className="block mb-2 text-sm font-medium text-gray-900 dark:text-white"
-                                >
+                                <label htmlFor="countries" className="block mb-2 text-sm font-medium text-gray-900 dark:text-white">
                                     Seller
                                 </label>
                                 <select
@@ -309,7 +263,6 @@ const Productcreateform = () => {
                                     className="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500"
                                     type="select"
                                     name="productname"
-                                    
                                 >
                                     <option selected>Choose a country</option>
                                     <option value="US">United States</option>
@@ -319,11 +272,7 @@ const Productcreateform = () => {
                                 </select>
                             </div>
                             <div className="w-full md:w-1/2 lg:w-1/2">
-                                
-                                <label
-                                    htmlFor="countries"
-                                    className="block mb-2 text-sm font-medium text-gray-900 dark:text-white"
-                                >
+                                <label htmlFor="countries" className="block mb-2 text-sm font-medium text-gray-900 dark:text-white">
                                     Manufacturer
                                 </label>
                                 <select
@@ -331,7 +280,6 @@ const Productcreateform = () => {
                                     className="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500"
                                     type="select"
                                     name="manufacturer_id"
-                                    
                                 >
                                     <option selected>Choose a country</option>
                                     <option value="US">United States</option>
@@ -362,13 +310,9 @@ const Productcreateform = () => {
                                     onChangeActive={(event, newHover) => {
                                         setHover(newHover);
                                     }}
-                                    emptyIcon={
-                                        <StarIcon style={{opacity: 0.55}} fontSize="inherit" />
-                                    }
+                                    emptyIcon={<StarIcon style={{ opacity: 0.55 }} fontSize="inherit" />}
                                 />
-                                {value !== null && (
-                                    <Box sx={{ml: 2}}>{labels[hover !== -1 ? hover : value]}</Box>
-                                )}
+                                {value !== null && <Box sx={{ ml: 2 }}>{labels[hover !== -1 ? hover : value]}</Box>}
                             </Box>
                         </div>
                     </div>
@@ -378,10 +322,7 @@ const Productcreateform = () => {
 
                         <div className="flex gap-3 flex-wrap justify-evenly lg:flex-nowrap ">
                             {images?.map((item, index) => (
-                                <div
-                                    key={index}
-                                    className="relative max-w-[200px] w-full h-[200px] "
-                                >
+                                <div key={index} className="relative max-w-[200px] w-full h-[200px] ">
                                     {images[index] ? (
                                         <img
                                             src={URL.createObjectURL(images[index])}
@@ -398,12 +339,7 @@ const Productcreateform = () => {
                                             alt="default-profile-pic"
                                         />
                                     )}
-                                    <input
-                                        type="file"
-                                        ref={inputRef}
-                                        onChange={(e) => handleImagechange(e, index)}
-                                        className="opacity-0 absolute inset-0 z-20"
-                                    />
+                                    <input type="file" ref={inputRef} onChange={(e) => handleImagechange(e, index)} className="opacity-0 absolute inset-0 z-20" />
                                 </div>
                             ))}
                         </div>

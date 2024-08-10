@@ -4,56 +4,41 @@ import { Link } from "react-router-dom";
 import VisibilityIcon from "@mui/icons-material/Visibility";
 import EditIcon from "@mui/icons-material/Edit";
 import DeleteIcon from "@mui/icons-material/Delete";
+import { baseURL } from "../../api";
 
-const Menufacturerlist = () => {
+const ManufacturerList = () => {
     const [orders, setOrders] = useState([]);
-    // const [searchmanu, setSearchmanu] = useState("");
+    const [search, setSearch] = useState("");
 
-    useEffect(() => {
-        axios
-            .get("http://192.168.1.4:5000/manufacturer/get-manufacturers")
-            .then((response) => {
-                const dataWithBase64Images = response.data.data.map((item) => {
-                    // Ensure m_logo is properly set as a Base64 string in the backend
-                    return item;
-                });
-
-                setOrders(dataWithBase64Images);
-            })
-            .catch((error) => console.error("Error fetching data:", error));
-    }, []);
-
-    console.log(orders);
-    const delete_Data = async (id) => {
+    // Function to fetch data based on search
+    const fetchManufacturers = async () => {
         try {
-            console.log(`Deleting item with ID: ${id}`);
+            const response = await axios.get(`http://192.168.1.4:5000/manufacturer/get-manufacturers?search=${search}`);
+            setOrders(response.data.data);
+        } catch (error) {
+            console.error("Error fetching data:", error);
+        }
+    };
+
+    // Fetch data when search changes or component mounts
+    useEffect(() => {
+        fetchManufacturers();
+    }, [search]);
+
+    // Handler for search input change
+    const searchInputHandler = (e) => {
+        setSearch(e.target.value);
+    };
+
+    // Function to handle deleting an item
+    const deleteData = async (id) => {
+        try {
             await axios.delete(`http://192.168.1.4:5000/manufacturer/delete-manufacturers/${id}`);
-            // Remove the deleted item from the state
             setOrders((prevOrders) => prevOrders.filter((order) => order.id !== id));
         } catch (error) {
             console.error("Error deleting data:", error);
         }
     };
-    // const searchinputmanu = () => {
-    //     axios
-    //         .get(`http://192.168.1.4:5000/product/get-product2?search=${searchmanu}`)
-    //         .then((res) => {
-    //             setOrders(res.data.data);
-    //             // console.log(res, "res");
-    //         })
-    //         .catch((err) => {
-    //             console.log(err);
-    //         });
-    // };
-
-    // useEffect(() => {
-    //     searchinputmanu();
-    // }, [searchmanu]);
-
-    // const manusearchInputhandler = (e) => {
-    //     setSearchmanu(e.target.value);
-    // };
-    // console.log(search,"searchh");
 
     return (
         <div>
@@ -111,7 +96,6 @@ const Menufacturerlist = () => {
                 </section>
 
                 {/* Best Selling Product Section */}
-
                 <section className="mx-5 my-5 !overflow-hidden ">
                     <div className="!w-full border shadow bg-white rounded-md p-5 block">
                         <div className="">
@@ -129,7 +113,7 @@ const Menufacturerlist = () => {
                                         </svg>
                                     </div>
                                     <input
-                                        // onChange={manusearchInputhandler}
+                                        onChange={searchInputHandler}
                                         type="search"
                                         id="default-search"
                                         className="block max-w-52 w-full h-10 p-4 ps-10 text-sm text-gray-900 border border-gray-300 rounded-lg bg-gray-50 focus:ring-blue-500 focus:border-blue-500 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500"
@@ -138,7 +122,7 @@ const Menufacturerlist = () => {
                                     />
                                 </div>
                             </form>
-                            <Link to="/manufactureruploadform">
+                            <Link to="/manufacturer_product_list_upload">
                                 <button className="w-full lg:w-40  md:w-40 px-5 py-2.5 focus:outline-none text-white bg-green-700 hover:bg-green-800 focus:ring-4 focus:ring-green-300 font-medium rounded-lg  dark:bg-green-600 dark:hover:bg-green-700 dark:focus:ring-green-800 text-base">
                                     Create Product
                                 </button>
@@ -150,49 +134,40 @@ const Menufacturerlist = () => {
                                 <thead className="bg-gray-100 text-gray-600">
                                     <tr className="border-b border-gray-300">
                                         <th scope="col" className="px-4 py-2 border-r border-gray-300">
-                                            ID
+                                            UID
                                         </th>
                                         <th scope="col" className="px-4 py-2 border-r border-gray-300">
-                                            logo
+                                            Logo
                                         </th>
                                         <th scope="col" className="px-4 py-2 border-r border-gray-300">
-                                            manufacturer name
+                                            Manufacturer Name
                                         </th>
                                         <th scope="col" className="px-4 py-2 border-r border-gray-300">
-                                            manufacturer number
+                                            Manufacturer Number
                                         </th>
                                         <th scope="col" className="px-4 py-2 border-r border-gray-300">
-                                            manufacturer category
+                                            Manufacturer Category
                                         </th>
                                         <th scope="col" className="px-4 py-2 border-r border-gray-300">
-                                            manufacturer lic number
+                                            Manufacturer LIC Number
                                         </th>
                                         <th scope="col" className="px-4 py-2 border-r border-gray-300">
-                                            email
+                                            Email
                                         </th>
                                         <th scope="col" className="px-4 py-2 border-r border-gray-300">
-                                            manufacturer company name
+                                            Manufacturer Company Name
                                         </th>
-
                                         <th scope="col" className="px-4 py-2">
                                             Action
                                         </th>
                                     </tr>
                                 </thead>
                                 <tbody>
-                                    {orders.map((order, index) => (
+                                    {orders.map((order) => (
                                         <tr key={order.id} className="bg-white border-b dark:bg-gray-800 dark:border-gray-700">
-                                            <td className="px-2 py-2 border-r border-gray-300 text-center">{index + 1}</td>
+                                            <td className="px-2 py-2 border-r border-gray-300 text-center">{order.id}</td>
                                             <td className="px-2 py-2 border-r border-gray-300 text-center">
-                                                {order.m_logo ? (
-                                                    <img src={`http://192.168.1.4:5000/manufacturer/file/${order.file_name}`} alt="Logo" style={{ width: 50, height: 50 }} />
-                                                ) : (
-                                                    <img
-                                                        src="https://cdn.pixabay.com/photo/2015/10/05/22/37/blank-profile-picture-973460_960_720.png"
-                                                        alt="abc"
-                                                        style={{ width: 50, height: 50 }}
-                                                    ></img>
-                                                )}
+                                                <img className="max-h-[50px] w-full" src={`${baseURL}${order.file_name}`} alt="logo" />
                                             </td>
                                             <td className="px-2 py-2 border-r border-gray-300 text-center">{order.m_name}</td>
                                             <td className="px-2 py-2 border-r border-gray-300 text-center">{order.m_number}</td>
@@ -201,11 +176,14 @@ const Menufacturerlist = () => {
                                             <td className="px-2 py-2 border-r border-gray-300 text-center">{order.email}</td>
                                             <td className="px-2 py-2 border-r border-gray-300 text-center">{order.m_c_name}</td>
                                             <td className="px-2 py-5 gap-2 flex">
-                                                <Link to={`/manufacturerview/${order.product_id}`}>
+                                                {/* <Link to={`/manufacturerview/${order.product_id}`}> */}
+                                                <Link to={`/manufacturerview`}>
                                                     <VisibilityIcon className="bg-slate-300 rounded !text-xl" />
                                                 </Link>
-                                                <EditIcon className="bg-slate-300 rounded !text-xl" />
-                                                <DeleteIcon onClick={() => delete_Data(order.id)} className="bg-slate-300 rounded !text-xl" />
+                                                <Link to="/manufactureruploadform">
+                                                    <EditIcon className="bg-slate-300 rounded !text-xl" />
+                                                </Link>
+                                                <DeleteIcon onClick={() => deleteData(order.id)} className="bg-slate-300 rounded !text-xl" />
                                             </td>
                                         </tr>
                                     ))}
@@ -219,4 +197,4 @@ const Menufacturerlist = () => {
     );
 };
 
-export default Menufacturerlist;
+export default ManufacturerList;

@@ -1,9 +1,5 @@
-
-
 const ChartComponent = () => {
-  return (
-    <div>ChartComponent</div>
-  )
-}
+    return <div>ChartComponent</div>;
+};
 
-export default ChartComponent
+export default ChartComponent;

@@ -1,5 +1,5 @@
 import "./App.css";
-import {createBrowserRouter, RouterProvider} from "react-router-dom";
+import { createBrowserRouter, RouterProvider } from "react-router-dom";
 import Home from "./components/Home";
 import Login from "./components/Login";
 import User from "./components/User";
@@ -75,7 +75,7 @@ function App() {
                 },
                 {
                     path: "manufacturer_product_list_upload",
-                    element: <Manufacturer_product_upload/>,
+                    element: <Manufacturer_product_upload />,
                 },
                 {
                     path: "user",

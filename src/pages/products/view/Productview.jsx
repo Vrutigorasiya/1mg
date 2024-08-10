@@ -3,8 +3,6 @@ import PersonIcon from "@mui/icons-material/Person";
 import BrandingWatermarkIcon from "@mui/icons-material/BrandingWatermark";
 import CategoryIcon from "@mui/icons-material/Category";
 import RateReviewIcon from "@mui/icons-material/RateReview";
-// import { styled } from "@mui/material/styles";
-// import LinearProgress, { linearProgressClasses } from "@mui/material/LinearProgress";
 import { Link, useParams } from "react-router-dom";
 import axios from "axios";
 
@@ -35,18 +33,6 @@ const Productview = () => {
     useEffect(() => {
         productviewdata();
     }, []);
-
-    // const BorderLinearProgress = styled(LinearProgress)(({ theme }) => ({
-    //     height: 4,
-    //     borderRadius: 3,
-    //     [`&.${linearProgressClasses.colorPrimary}`]: {
-    //         backgroundColor: theme.palette.grey[theme.palette.mode === "light" ? 200 : 800],
-    //     },
-    //     [`& .${linearProgressClasses.bar}`]: {
-    //         borderRadius: 5,
-    //         backgroundColor: theme.palette.mode === "light" ? "#1a90ff" : "#308fe8",
-    //     },
-    // }));
 
     return (
         <div ref={eleemntref}>
@@ -90,7 +76,7 @@ const Productview = () => {
                     <div>
                         {/* <h5 className="text-lg font-medium py-4 ">Product Gallery</h5> */}
                         <div>
-                            <img src="public/imgs/medicine.jpg" alt="abc" className=" border-2 border-dashed border-neutral-300 rounded-md w-80"></img>
+                            <img src="public/imgs/logo.png" alt="abc" className=" border-2 border-dashed border-neutral-300 rounded-md w-80"></img>
                         </div>
                         <div className="mt-3 flex justify-between">
                             <img src="public/imgs/medicine.jpg" alt="abc" className="border-2 border-dashed border-neutral-300 rounded-md xl:max-w-[74px] max-w-[40px] w-full"></img>
@@ -137,7 +123,6 @@ const Productview = () => {
                                 <p className="capitalize mt-2">{data.product_products_type}</p>
                                 <p className="capitalize mt-2">{data.product_store_type}</p>
                                 <p className="capitalize mt-2 ">
-                                    {" "}
                                     {data.product_rating_count} Ratings & {data.product_rating} Reviews
                                 </p>
                             </div>
@@ -148,126 +133,6 @@ const Productview = () => {
                     <p className="">Product Description</p>
                     <p className="mt-3">{data.product_description}</p>
                 </div>
-                {/* <div className="mt-12">
-                        <p className="">Ratings & Reviews</p>
-                        <div className="flex mt-3 gap-3">
-                            <p>5 star</p>
-                            <BorderLinearProgress variant="determinate" value={75} className="w-52 mt-3" />
-                            <p>(26)</p>
-                        </div>
-                        <div className="flex mt-3 gap-3">
-                            <p>4 star</p>
-                            <BorderLinearProgress variant="determinate" value={65} className="w-52 mt-3" />
-                            <p>(22)</p>
-                        </div>
-                        <div className="flex mt-3 gap-3">
-                            <p>3 star</p>
-                            <BorderLinearProgress variant="determinate" value={45} className="w-52 mt-3" />
-                            <p>(17)</p>
-                        </div>
-                        <div className="flex mt-3 gap-3">
-                            <p>2 star</p>
-                            <BorderLinearProgress variant="determinate" value={50} className="w-52 mt-3" />
-                            <p>(10)</p>
-                        </div>
-                        <div className="flex mt-3 gap-3">
-                            <p>1 star</p>
-                            <BorderLinearProgress variant="determinate" value={35} className="w-52 mt-3" />
-                            <p>(2)</p>
-                        </div>
-                    </div> */}
-                {/* <div className="mt-12">
-                        <p>Customer reviews</p>
-                        <div className="bg-stone-200 rounded-md py-5 mt-3">
-                            <div className="flex px-5 items-center">
-                                <img src={profile} alt="abc" className="md:w-16 w-8 rounded-full border-2 border-indigo-300 object-cover"></img>
-                                <div className="pl-4 ">
-                                    <p className="uppercase text-sm">Miron Mahmud</p>
-                                    <p className=" text-sm">25 minutes ago!</p>
-                                </div>
-                            </div>
-                            <div className="flex gap-10 items-center">
-                                <Stack className="px-5 ">
-                                    <Rating name="half-rating" defaultValue={2.5} precision={0.5} />
-                                </Stack>
-                                <button className="bg-slate-500 capitalize max-w-[60px] w-full rounded py-2 ">reply</button>
-                            </div>
-                            <p className="mt-4 px-5">
-                                Lorem ipsum dolor sit amet consectetur adipisicing elit. Omnis quo nostrum dolore fugiat ducimus labore debitis unde autem recusandae? Eius harum tempora quis minima,
-                                adipisci natus quod magni omnis quas.
-                            </p>
-                        </div>
-                        <div className="bg-stone-200 max-w-[850px] w-full ml-auto rounded-md py-5 mt-3">
-                            <div className="flex px-5 items-center">
-                                <img src={profile} alt="abc" className="md:w-16 w-8 rounded-full border-2 border-indigo-300 object-cover"></img>
-                                <div className="pl-4 ">
-                                    <p className="uppercase text-sm">Miron Mahmud</p>
-                                    <p className=" text-sm">25 minutes ago!</p>
-                                </div>
-                            </div>
-                            <div className="flex gap-10 items-center">
-                                <Stack className="px-5 ">
-                                    <Rating name="half-rating" defaultValue={2.5} precision={0.5} />
-                                </Stack>
-                                <button className="bg-slate-500 capitalize max-w-[60px] w-full rounded py-2 ">reply</button>
-                            </div>
-                            <p className="mt-4 px-5">
-                                Lorem ipsum dolor sit amet consectetur adipisicing elit. Omnis quo nostrum dolore fugiat ducimus labore debitis unde autem recusandae? Eius harum tempora quis minima,
-                                adipisci natus quod magni omnis quas.
-                            </p>
-                        </div>
-                        <div className="bg-stone-200  max-w-[850px] w-full ml-auto rounded-md py-5 mt-3">
-                            <div className="flex px-5 items-center">
-                                <img src={profile} alt="abc" className="md:w-16 w-8 rounded-full border-2 border-indigo-300 object-cover"></img>
-                                <div className="pl-4 ">
-                                    <p className="uppercase text-sm">Miron Mahmud</p>
-                                    <p className=" text-sm">25 minutes ago!</p>
-                                </div>
-                            </div>
-                            <div className="flex gap-10 items-center">
-                                <Stack className="px-5 ">
-                                    <Rating name="half-rating" defaultValue={2.5} precision={0.5} />
-                                </Stack>
-                                <button className="bg-slate-500 capitalize max-w-[60px] w-full rounded py-2 ">reply</button>
-                            </div>
-                            <p className="mt-4 px-5">
-                                Lorem ipsum dolor sit amet consectetur adipisicing elit. Omnis quo nostrum dolore fugiat ducimus labore debitis unde autem recusandae? Eius harum tempora quis minima,
-                                adipisci natus quod magni omnis quas.
-                            </p>
-                        </div>
-                        <div className="bg-stone-200 rounded-md py-5 mt-3">
-                            <div className="flex px-5 items-center">
-                                <img src={profile} alt="abc" className="md:w-16 w-8 rounded-full border-2 border-indigo-300 object-cover"></img>
-                                <div className="pl-4 ">
-                                    <p className="uppercase text-sm">Miron Mahmud</p>
-                                    <p className=" text-sm">25 minutes ago!</p>
-                                </div>
-                            </div>
-                            <div className="flex gap-10 items-center">
-                                <Stack className="px-5 ">
-                                    <Rating name="half-rating" defaultValue={2.5} precision={0.5} />
-                                </Stack>
-                                <button className="bg-slate-500 capitalize max-w-[60px] w-full rounded py-2 ">reply</button>
-                            </div>
-                            <p className="mt-4 px-5">
-                                Lorem ipsum dolor sit amet consectetur adipisicing elit. Omnis quo nostrum dolore fugiat ducimus labore debitis unde autem recusandae? Eius harum tempora quis minima,
-                                adipisci natus quod magni omnis quas.
-                            </p>
-                        </div>
-                        <div>
-                            <p className="mt-8">Review Reply Form</p>
-                            <TextareaAutosize
-                                placeholder="write here..."
-                                aria-label="minimum height"
-                                minRows={5}
-                                className="rounded outline-none mt-2 max-w-[945px] w-full py-3 px-3"
-                                style={{ backgroundColor: "#fafafa", border: "1px solid #0000001a" }}
-                            />
-                        </div>
-                        <div>
-                            <button className="capitalize bg-slate-500 w-full rounded h-12 mt-3 text-slate-50 font-medium">drop your replies</button>
-                        </div>
-                    </div> */}
             </div>
             <div className="shadow bg-white mx-5 rounded-md px-5 py-5 mb-5">
                 {/* <div>

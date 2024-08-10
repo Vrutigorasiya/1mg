@@ -1,4 +1,4 @@
-import {useEffect, useState} from "react";
+import { useEffect, useState } from "react";
 import axios from "axios";
 import ChartComponent from "../../components/ChartComponent";
 
@@ -25,7 +25,7 @@ const Adminorder = () => {
             <section className="mt-10">
                 <div className="mx-4 md:mx-10 gap-7 grid grid-cols-1 md:grid-cols-3">
                     <div className="col-span-1">
-                        <ChartComponent/>
+                        <ChartComponent />
                     </div>
                     <div className="col-span-1">
                         <div className="border shadow-2xl rounded-xl min-w-80 bg-gradient-to-r from-green-300 to-green-200 mb-4 md:mb-0">
@@ -64,10 +64,7 @@ const Adminorder = () => {
                     </div>
                     <div className="flex flex-col md:flex-row ms-5 mt-7">
                         <form className="max-w-sm w-full md:w-72 mb-4 md:mb-0 md:mr-5">
-                            <label
-                                htmlFor="showby"
-                                className="block mb-2 text-sm font-medium text-gray-900 dark:text-white"
-                            >
+                            <label htmlFor="showby" className="block mb-2 text-sm font-medium text-gray-900 dark:text-white">
                                 SHOW BY
                             </label>
                             <select
@@ -82,10 +79,7 @@ const Adminorder = () => {
                             </select>
                         </form>
                         <form className="max-w-sm w-full md:w-72">
-                            <label
-                                htmlFor="categoryby"
-                                className="block mb-2 text-sm font-medium text-gray-900 dark:text-white"
-                            >
+                            <label htmlFor="categoryby" className="block mb-2 text-sm font-medium text-gray-900 dark:text-white">
                                 CATEGORY BY
                             </label>
                             <select
@@ -141,10 +135,7 @@ const Adminorder = () => {
                                     <tbody key={index}>
                                         <tr className="bg-white border-b dark:bg-gray-800 dark:border-gray-700">
                                             <td className="px-6 py-4">{value.id}</td>
-                                            <th
-                                                scope="row"
-                                                className="px-6 py-4 font-medium text-gray-900 whitespace-nowrap dark:text-white"
-                                            >
+                                            <th scope="row" className="px-6 py-4 font-medium text-gray-900 whitespace-nowrap dark:text-white">
                                                 {value.product_title}
                                             </th>
                                             <td className="px-6 py-4">{value.brand}</td>
@@ -158,8 +149,6 @@ const Adminorder = () => {
                                         </tr>
                                     </tbody>;
                                 })}
-
-                                
                             </table>
                         </div>
                         {/* pagination */}
@@ -167,57 +156,22 @@ const Adminorder = () => {
                             {/* <!-- Help text --> */}
                             <div className="mb-4 md:mb-0">
                                 <span className="text-sm text-gray-700 dark:text-gray-400">
-                                    Showing{" "}
-                                    <span className="font-semibold text-gray-900 dark:text-white">
-                                        1
-                                    </span>{" "}
-                                    to{" "}
-                                    <span className="font-semibold text-gray-900 dark:text-white">
-                                        10
-                                    </span>{" "}
-                                    of{" "}
-                                    <span className="font-semibold text-gray-900 dark:text-white">
-                                        100
-                                    </span>{" "}
-                                    Entries
+                                    Showing <span className="font-semibold text-gray-900 dark:text-white">1</span> to <span className="font-semibold text-gray-900 dark:text-white">10</span> of{" "}
+                                    <span className="font-semibold text-gray-900 dark:text-white">100</span> Entries
                                 </span>
                             </div>
                             <div className="inline-flex">
                                 {/* <!-- Buttons --> */}
                                 <button className="flex items-center justify-center px-3 h-8 text-sm font-medium text-white bg-gray-800 rounded-s hover:bg-gray-900 dark:bg-gray-800 dark:border-gray-700 dark:text-gray-400 dark:hover:bg-gray-700 dark:hover:text-white">
-                                    <svg
-                                        className="w-3.5 h-3.5 me-2 rtl:rotate-180"
-                                        aria-hidden="true"
-                                        xmlns="http://www.w3.org/2000/svg"
-                                        fill="none"
-                                        viewBox="0 0 14 10"
-                                    >
-                                        <path
-                                            stroke="currentColor"
-                                            strokeLinecap="round"
-                                            strokeLinejoin="round"
-                                            strokeWidth="2"
-                                            d="M13 5H1m0 0 4 4M1 5l4-4"
-                                        />
+                                    <svg className="w-3.5 h-3.5 me-2 rtl:rotate-180" aria-hidden="true" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 14 10">
+                                        <path stroke="currentColor" strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M13 5H1m0 0 4 4M1 5l4-4" />
                                     </svg>
                                     Prev
                                 </button>
                                 <button className="flex items-center justify-center px-3 h-8 text-sm font-medium text-white bg-gray-800 border-0 border-s border-gray-700 rounded-e hover:bg-gray-900 dark:bg-gray-800 dark:border-gray-700 dark:text-gray-400 dark:hover:bg-gray-700 dark:hover:text-white">
                                     Next
-                                    <svg
-                                        className="w-3.5 h-3.5 ms-2 rtl:rotate-180"
-                                        aria-hidden="true"
-                                        xmlns="http://www.w3.org/2000/svg"
-                                        fill="none"
-                                        viewBox="0 0 14 10"
-                                    >
-                                        <path
-                                            stroke="currentColor"
-                                            strokeLinecap="round"
-                                            strokeLinejoin="round"
-                                            strokeWidth="2"
-                                            d="M1 5h12m0 0L9 1m4 4L9 9"
-                                        />
+                                    <svg className="w-3.5 h-3.5 ms-2 rtl:rotate-180" aria-hidden="true" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 14 10">
+                                        <path stroke="currentColor" strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M1 5h12m0 0L9 1m4 4L9 9" />
                                     </svg>
                                 </button>
                             </div>
@@ -230,6 +184,3 @@ const Adminorder = () => {
 };
 
 export default Adminorder;
-
-
-
