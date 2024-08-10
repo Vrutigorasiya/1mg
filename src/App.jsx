@@ -1,5 +1,5 @@
 import "./App.css";
-import {createBrowserRouter, RouterProvider} from "react-router-dom";
+import { createBrowserRouter, RouterProvider } from "react-router-dom";
 import Home from "./components/Home";
 import Login from "./components/Login";
 import User from "./components/User";
@@ -13,7 +13,9 @@ import Productview from "./pages/products/view/Productview";
 import Productcreateform from "./pages/products/create/Productcreateform";
 import Menufactureruploadform from "./pages/manufacturer/create/Menufactureruploadform";
 import Manufacturer_product_upload from "./pages/manufacturer/product create/Manufacturer_product_upload";
-
+import Adminprofile from "./pages/profile/Adminprofile";
+import Menufacturerlist from "./pages/manufacturer/Menufacturerlist";
+import Menufacturerview from "./pages/manufacturer/view/Menufacturerview";
 
 function App() {
     const router = createBrowserRouter([
@@ -73,8 +75,16 @@ function App() {
                     element: <Menufactureruploadform />,
                 },
                 {
+                    path: "manufacturerlist",
+                    element: <Menufacturerlist />,
+                },
+                {
+                    path: "manufacturerview",
+                    element: <Menufacturerview />,
+                },
+                {
                     path: "manufacturer_product_list_upload",
-                    element: <Manufacturer_product_upload/>,
+                    element: <Manufacturer_product_upload />,
                 },
                 {
                     path: "user",

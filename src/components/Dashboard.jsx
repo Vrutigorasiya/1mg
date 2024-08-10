@@ -1,4 +1,4 @@
-import  { useEffect, useState } from "react";
+import { useEffect, useState } from "react";
 import AccountCircleIcon from "@mui/icons-material/AccountCircle";
 import MoreVertIcon from "@mui/icons-material/MoreVert";
 import ShoppingCartIcon from "@mui/icons-material/ShoppingCart";
@@ -11,7 +11,6 @@ import EditIcon from "@mui/icons-material/Edit";
 import DeleteIcon from "@mui/icons-material/Delete";
 
 const Dashboard = () => {
-
     const [orders, setOrders] = useState([]);
 
     const orderdata = () => {
@@ -33,11 +32,10 @@ const Dashboard = () => {
         orderdata();
     }, []);
 
-
     const data = [
         { value: 26.7, label: "2013" },
         { value: 25.9, label: "2014" },
-        { value: 17.1, label: "2015" },
+        { value: 17, label: "2015" },
         { value: 30.3, label: "2016" },
     ];
 
@@ -50,8 +48,8 @@ const Dashboard = () => {
         <>
             <div className="my-10 mx-5">
                 <div className="flex gap-4 ">
-                    <div className="gap-3 grid grid-cols-2">
-                        <div className="flex text-white justify-around border shadow rounded-xl min-w-96  bg-gradient-to-r from-green-600 to-green-300">
+                    <div className="gap-3 grid grid-cols-2 w-full">
+                        <div className="flex text-white justify-around border shadow rounded-xl  max-w-96 w-full  bg-gradient-to-r from-green-600 to-green-300">
                             <div className=" mt-5 ">
                                 <div>
                                     <p className="text-xl">Total User</p>
@@ -70,7 +68,7 @@ const Dashboard = () => {
                                 </div>
                             </div>
                         </div>
-                        <div className="flex text-white justify-around border shadow rounded-xl min-w-96  bg-gradient-to-r from-violet-600 to-violet-300">
+                        <div className="flex text-white justify-around border shadow rounded-xl max-w-96 w-full  bg-gradient-to-r from-violet-600 to-violet-300">
                             <div className=" mt-5 ">
                                 <div>
                                     <p className="text-xl">Total User</p>
@@ -89,7 +87,7 @@ const Dashboard = () => {
                                 </div>
                             </div>
                         </div>
-                        <div className="flex text-white justify-around border shadow rounded-xl min-w-96  bg-gradient-to-r from-sky-600 to-sky-300">
+                        <div className="flex text-white justify-around border shadow rounded-xl max-w-96 w-full  bg-gradient-to-r from-sky-600 to-sky-300">
                             <div className=" mt-5 ">
                                 <div>
                                     <p className="text-xl">Total User</p>
@@ -108,7 +106,7 @@ const Dashboard = () => {
                                 </div>
                             </div>
                         </div>{" "}
-                        <div className="flex text-white justify-around border shadow rounded-xl min-w-96  bg-gradient-to-r from-amber-500 to-amber-300">
+                        <div className="flex text-white justify-around border shadow rounded-xl max-w-96 w-full  bg-gradient-to-r from-amber-500 to-amber-300">
                             <div className=" mt-5 ">
                                 <div>
                                     <p className="text-xl">Total User</p>
@@ -129,7 +127,7 @@ const Dashboard = () => {
                         </div>
                     </div>
                     <div>
-                        <div className="border shadow-xl rounded-xl min-w-96 min-h-80 bg-sky-600">
+                        <div className="border shadow-xl rounded-xl max-w-96 w-full min-h-80 bg-sky-600">
                             <div className=" text-white m-4">
                                 <p className="text-xl">Total Sales</p>
                                 <p className="text-3xl font-bold">$5,254,541.00</p>
@@ -158,112 +156,112 @@ const Dashboard = () => {
                 </div>
             </div>
             <div className="mx-5 my-5 !overflow-hidden ">
-                    <div className="!w-full border shadow bg-white rounded-md p-5 block">
-                        <div className="">
-                            <h1 className="text-xl font-bold ">Best Selling Products</h1>
-                        </div>
-                        <div className="flex  mt-4">
-                            <form className="max-w-sm w-72">
-                                <label htmlFor="showby" className="block mb-2 text-sm font-medium text-gray-900 dark:text-white">
-                                    SHOW BY
-                                </label>
-                                <select
-                                    id="showby"
-                                    className="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500"
-                                    defaultValue=""
-                                >
-                                    <option value="">None</option>
-                                    <option value="v1">value 1</option>
-                                    <option value="v2">value 2</option>
-                                    <option value="v3">value 3</option>
-                                    <option value="v4">value 4</option>
-                                </select>
-                            </form>
-                            <form className="max-w-sm w-72 ms-5">
-                                <label htmlFor="categoryby" className="block mb-2 text-sm font-medium text-gray-900 dark:text-white">
-                                    CATEGORY BY
-                                </label>
-                                <select
-                                    id="categoryby"
-                                    className="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500"
-                                    defaultValue=""
-                                >
-                                    <option value="">None</option>
-                                    <option value="v5">value 1</option>
-                                    <option value="v6">value 2</option>
-                                    <option value="v7">value 3</option>
-                                    <option value="v8">value 4</option>
-                                </select>
-                            </form>
-                        </div>
-                        <div className="w-full py-4 overflow-x-auto">
-                            <table className="w-full bg-white border border-gray-300 border-collapse text-sm">
-                                <thead className="bg-gray-100 text-gray-600">
-                                    <tr className="border-b border-gray-300">
-                                        <th scope="col" className="px-4 py-2 border-r border-gray-300">
-                                            UID
-                                        </th>
-                                        <th scope="col" className="px-4 py-2 border-r border-gray-300">
-                                            Title
-                                        </th>
-                                        <th scope="col" className="px-4 py-2 border-r border-gray-300">
-                                            Brand
-                                        </th>
-                                        <th scope="col" className="px-4 py-2 border-r border-gray-300">
-                                            Rating
-                                        </th>
-                                        <th scope="col" className="px-4 py-2 border-r border-gray-300">
-                                            Category
-                                        </th>
-                                        <th scope="col" className="px-4 py-2 border-r border-gray-300">
-                                            Price
-                                        </th>
-                                        <th scope="col" className="px-4 py-2 border-r border-gray-300">
-                                            Stock Quantity
-                                        </th>
-                                        <th scope="col" className="px-4 py-2 border-r border-gray-300">
-                                            Product Image
-                                        </th>
-                                        <th scope="col" className="px-4 py-2 border-r border-gray-300">
-                                            Seller Company Name
-                                        </th>
-                                        <th scope="col" className="px-4 py-2 border-r border-gray-300">
-                                            Manufacturer Name
-                                        </th>
-                                        <th scope="col" className="px-4 py-2">
-                                            Action
-                                        </th>
+                <div className="!w-full border shadow bg-white rounded-md p-5 block">
+                    <div className="">
+                        <h1 className="text-xl font-bold ">Best Selling Products</h1>
+                    </div>
+                    <div className="flex  mt-4">
+                        <form className="max-w-sm w-72">
+                            <label htmlFor="showby" className="block mb-2 text-sm font-medium text-gray-900 dark:text-white">
+                                SHOW BY
+                            </label>
+                            <select
+                                id="showby"
+                                className="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500"
+                                defaultValue=""
+                            >
+                                <option value="">None</option>
+                                <option value="v1">value 1</option>
+                                <option value="v2">value 2</option>
+                                <option value="v3">value 3</option>
+                                <option value="v4">value 4</option>
+                            </select>
+                        </form>
+                        <form className="max-w-sm w-72 ms-5">
+                            <label htmlFor="categoryby" className="block mb-2 text-sm font-medium text-gray-900 dark:text-white">
+                                CATEGORY BY
+                            </label>
+                            <select
+                                id="categoryby"
+                                className="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500"
+                                defaultValue=""
+                            >
+                                <option value="">None</option>
+                                <option value="v5">value 1</option>
+                                <option value="v6">value 2</option>
+                                <option value="v7">value 3</option>
+                                <option value="v8">value 4</option>
+                            </select>
+                        </form>
+                    </div>
+                    <div className="w-full py-4 overflow-x-auto">
+                        <table className="w-full bg-white border border-gray-300 border-collapse text-sm">
+                            <thead className="bg-gray-100 text-gray-600">
+                                <tr className="border-b border-gray-300">
+                                    <th scope="col" className="px-4 py-2 border-r border-gray-300">
+                                        UID
+                                    </th>
+                                    <th scope="col" className="px-4 py-2 border-r border-gray-300">
+                                        Title
+                                    </th>
+                                    <th scope="col" className="px-4 py-2 border-r border-gray-300">
+                                        Brand
+                                    </th>
+                                    <th scope="col" className="px-4 py-2 border-r border-gray-300">
+                                        Rating
+                                    </th>
+                                    <th scope="col" className="px-4 py-2 border-r border-gray-300">
+                                        Category
+                                    </th>
+                                    <th scope="col" className="px-4 py-2 border-r border-gray-300">
+                                        Price
+                                    </th>
+                                    <th scope="col" className="px-4 py-2 border-r border-gray-300">
+                                        Stock Quantity
+                                    </th>
+                                    <th scope="col" className="px-4 py-2 border-r border-gray-300">
+                                        Product Image
+                                    </th>
+                                    <th scope="col" className="px-4 py-2 border-r border-gray-300">
+                                        Seller Company Name
+                                    </th>
+                                    <th scope="col" className="px-4 py-2 border-r border-gray-300">
+                                        Manufacturer Name
+                                    </th>
+                                    <th scope="col" className="px-4 py-2">
+                                        Action
+                                    </th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                {orders.map((value, index) => (
+                                    <tr key={index} className="bg-white border-b dark:bg-gray-800 dark:border-gray-700">
+                                        <td className="px-2 py-2 border-r border-gray-300 text-center">{value.product_id}</td>
+                                        <td className="px-2 py-2 border-r border-gray-300 ">{value.product_title}</td>
+                                        <td className="px-2 py-2 border-r border-gray-300">{value.product_brand}</td>
+                                        <td className="px-2 py-2 border-r border-gray-300 text-center">{value.product_rating}</td>
+                                        <td className="px-2 py-2 border-r border-gray-300">{value.product_products_type}</td>
+                                        <td className="px-2 py-2 border-r border-gray-300 text-center">${value.product_price}</td>
+                                        <td className="px-2 py-2 border-r border-gray-300 text-center">{value.product_stock_quantity}</td>
+                                        <td className="px-2 py-2 border-r border-gray-300">
+                                            <img src={value.product_img1} alt="abc" className="w-12 h-12 object-cover" />
+                                        </td>
+                                        <td className="px-2 py-2 border-r border-gray-300">{value.seller_company_name}</td>
+                                        <td className="px-2 py-2 border-r border-gray-300">{value.m_name}</td>
+                                        <td className="px-2 py-5 gap-2 flex">
+                                            <Link to={`/productview/${value.product_id}`}>
+                                                <VisibilityIcon className="bg-slate-300 rounded !text-xl" />
+                                            </Link>
+                                            <EditIcon className="bg-slate-300 rounded !text-xl" />
+                                            <DeleteIcon className="bg-slate-300 rounded !text-xl" />
+                                        </td>
                                     </tr>
-                                </thead>
-                                <tbody>
-                                    {orders.map((value, index) => (
-                                        <tr key={index} className="bg-white border-b dark:bg-gray-800 dark:border-gray-700">
-                                            <td className="px-2 py-2 border-r border-gray-300 text-center">{value.product_id}</td>
-                                            <td className="px-2 py-2 border-r border-gray-300 ">{value.product_title}</td>
-                                            <td className="px-2 py-2 border-r border-gray-300">{value.product_brand}</td>
-                                            <td className="px-2 py-2 border-r border-gray-300 text-center">{value.product_rating}</td>
-                                            <td className="px-2 py-2 border-r border-gray-300">{value.product_products_type}</td>
-                                            <td className="px-2 py-2 border-r border-gray-300 text-center">${value.product_price}</td>
-                                            <td className="px-2 py-2 border-r border-gray-300 text-center">{value.product_stock_quantity}</td>
-                                            <td className="px-2 py-2 border-r border-gray-300">
-                                                <img src={value.product_img1} alt="abc" className="w-12 h-12 object-cover" />
-                                            </td>
-                                            <td className="px-2 py-2 border-r border-gray-300">{value.seller_company_name}</td>
-                                            <td className="px-2 py-2 border-r border-gray-300">{value.m_name}</td>
-                                            <td className="px-2 py-5 gap-2 flex">
-                                                <Link to={`/productview/${value.product_id}`}>
-                                                    <VisibilityIcon className="bg-slate-300 rounded !text-xl" />
-                                                </Link>
-                                                <EditIcon className="bg-slate-300 rounded !text-xl" />
-                                                <DeleteIcon className="bg-slate-300 rounded !text-xl" />
-                                            </td>
-                                        </tr>
-                                    ))}
-                                </tbody>
-                            </table>
-                        </div>
+                                ))}
+                            </tbody>
+                        </table>
                     </div>
                 </div>
+            </div>
         </>
     );
 };

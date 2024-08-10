@@ -1,21 +1,22 @@
-import  {useState, useRef} from "react";
+import { useState, useRef, useEffect } from "react";
 // import HomeIcon from "@mui/icons-material/Home";
-import {Box, Rating, TextareaAutosize} from "@mui/material";
+import { Box, Rating, TextareaAutosize } from "@mui/material";
 import StarIcon from "@mui/icons-material/Star";
-import {Link} from "react-router-dom";
-import {useFormik} from "formik";
-import {api} from "../../../api";
+import { Link } from "react-router-dom";
+import { useFormik } from "formik";
+import { api } from "../../../api";
 
 const Manufacturer_product_upload = () => {
-    // const [value, setValue] = React.useState(2);
-    // const [hover, setHover] = React.useState(-1);
+    const eleemntref = useRef();
+    useEffect(() => {
+        eleemntref.current && eleemntref.current.scrollIntoView();
+    }, []);
+
     const [images, setImges] = useState(["", "", "", "", ""]);
 
     const [selectedFile, setSelectedFile] = useState();
 
-    
-
-    const {values, handleChange, handleSubmit} = useFormik({
+    const { values, handleChange, handleSubmit } = useFormik({
         initialValues: {
             product_title: "",
             brand: "",
@@ -45,11 +46,10 @@ const Manufacturer_product_upload = () => {
                 console.log(error);
             }
 
-            console.log("product create forms", values); 
+            console.log("product create forms", values);
         },
     });
 
-    
     const inputRef = useRef(null);
 
     const handleImageclick = () => {
@@ -62,71 +62,43 @@ const Manufacturer_product_upload = () => {
 
         async (event) => {
             const file = event.target.files[0];
-    
+
             const reader = new FileReader();
-    
+
             reader.onloadend = async () => {
                 const binaryData = reader.result;
-    
+
                 const formData = new FormData();
-                formData.append("image", new Blob([binaryData], {type: file.type}), file.name);
-    
+                formData.append("image", new Blob([binaryData], { type: file.type }), file.name);
+
                 try {
                     const response = await fetch("YOUR_API_ENDPOINT", {
                         method: "POST",
                         body: formData,
                     });
-    
+
                     const data = await response.json();
                     console.log("Upload successful", data);
                 } catch (error) {
                     console.error("Upload error", error);
                 }
             };
-            // setValues("m_logo", file)
             setSelectedFile(file);
         };
-    
     };
 
-    // const labels = {
-    //     0.5: "0.5",
-    //     1: "1",
-    //     1.5: "1.5",
-    //     2: "2",
-    //     2.5: "2.5",
-    //     3: "3",
-    //     3.5: "3.5",
-    //     4: "4",
-    //     4.5: "4.5",
-    //     5: "5",
-    // };
-
-    // function getLabelText(value) {
-    //     return `${value} Star${value !== 1 ? "s" : ""}, ${labels[value]}`;
-    // }
-
     return (
-        <>
+        <div ref={eleemntref}>
             <div className="container mx-auto">
                 <div className="shadow-xl bg-white mt-7 mx-3 rounded-xl p-5 block md:flex lg:flex items-center justify-between">
                     <div className=" ">
-                        <h5 className="text-lg font-medium"> Product Create</h5>
+                        <h5 className="text-lg font-medium"> Manufacturer Create</h5>
                     </div>
                     <nav className="flex" aria-label="Breadcrumb">
                         <ol className="inline-flex items-center space-x-1 md:space-x-2 rtl:space-x-reverse">
                             <li className="inline-flex items-center">
-                                <Link
-                                    to="/dashboard"
-                                    className="inline-flex items-center text-sm font-medium text-gray-700 hover:text-blue-600 dark:text-gray-400 dark:hover:text-white"
-                                >
-                                    <svg
-                                        className="w-3 h-3 me-2.5"
-                                        aria-hidden="true"
-                                        xmlns="http://www.w3.org/2000/svg"
-                                        fill="currentColor"
-                                        viewBox="0 0 20 20"
-                                    >
+                                <Link to="/dashboard" className="inline-flex items-center text-sm font-medium text-gray-700 hover:text-blue-600 dark:text-gray-400 dark:hover:text-white">
+                                    <svg className="w-3 h-3 me-2.5" aria-hidden="true" xmlns="http://www.w3.org/2000/svg" fill="currentColor" viewBox="0 0 20 20">
                                         <path d="m19.707 9.293-2-2-7-7a1 1 0 0 0-1.414 0l-7 7-2 2a1 1 0 0 0 1.414 1.414L2 10.414V18a2 2 0 0 0 2 2h3a1 1 0 0 0 1-1v-4a1 1 0 0 1 1-1h2a1 1 0 0 1 1 1v4a1 1 0 0 0 1 1h3a2 2 0 0 0 2-2v-7.586l.293.293a1 1 0 0 0 1.414-1.414Z" />
                                     </svg>
                                     Dashboard
@@ -134,49 +106,20 @@ const Manufacturer_product_upload = () => {
                             </li>
                             <li>
                                 <div className="flex items-center">
-                                    <svg
-                                        className="rtl:rotate-180 w-3 h-3 text-gray-400 mx-1"
-                                        aria-hidden="true"
-                                        xmlns="http://www.w3.org/2000/svg"
-                                        fill="none"
-                                        viewBox="0 0 6 10"
-                                    >
-                                        <path
-                                            stroke="currentColor"
-                                            strokeLinecap="round"
-                                            strokeLinejoin="round"
-                                            strokeWidth="2"
-                                            d="m1 9 4-4-4-4"
-                                        />
+                                    <svg className="rtl:rotate-180 w-3 h-3 text-gray-400 mx-1" aria-hidden="true" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 6 10">
+                                        <path stroke="currentColor" strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="m1 9 4-4-4-4" />
                                     </svg>
-                                    <Link
-                                        to="#"
-                                        className="ms-1 text-sm font-medium text-gray-700 hover:text-blue-600 md:ms-2 dark:text-gray-400 dark:hover:text-white"
-                                    >
+                                    <Link to="#" className="ms-1 text-sm font-medium text-gray-700 hover:text-blue-600 md:ms-2 dark:text-gray-400 dark:hover:text-white">
                                         Manufacturer List
                                     </Link>
                                 </div>
                             </li>
                             <li aria-current="page">
                                 <div className="flex items-center">
-                                    <svg
-                                        className="rtl:rotate-180 w-3 h-3 text-gray-400 mx-1"
-                                        aria-hidden="true"
-                                        xmlns="http://www.w3.org/2000/svg"
-                                        fill="none"
-                                        viewBox="0 0 6 10"
-                                    >
-                                        <path
-                                            stroke="currentColor"
-                                            strokeLinecap="round"
-                                            strokeLinejoin="round"
-                                            strokeWidth="2"
-                                            d="m1 9 4-4-4-4"
-                                        />
+                                    <svg className="rtl:rotate-180 w-3 h-3 text-gray-400 mx-1" aria-hidden="true" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 6 10">
+                                        <path stroke="currentColor" strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="m1 9 4-4-4-4" />
                                     </svg>
-                                    <span className="ms-1 text-sm font-medium text-gray-500 md:ms-2 dark:text-gray-400">
-                                        Manufacrurer Product upload
-                                    </span>
+                                    <span className="ms-1 text-sm font-medium text-gray-500 md:ms-2 dark:text-gray-400">Manufacrurer Product upload</span>
                                 </div>
                             </li>
                         </ol>
@@ -224,7 +167,7 @@ const Manufacturer_product_upload = () => {
                                 value={values.stock_quantity}
                                 onChange={handleChange}
                                 className="rounded outline-none mt-1 w-full p-3"
-                                style={{backgroundColor: "#fafafa", border: "1px solid #0000001a"}}
+                                style={{ backgroundColor: "#fafafa", border: "1px solid #0000001a" }}
                             />
                         </div>
 
@@ -238,7 +181,7 @@ const Manufacturer_product_upload = () => {
                                 aria-label="minimum height"
                                 minRows={3}
                                 className="rounded outline-none mt-1 w-full"
-                                style={{backgroundColor: "#fafafa", border: "1px solid #0000001a"}}
+                                style={{ backgroundColor: "#fafafa", border: "1px solid #0000001a" }}
                             />
                         </div>
                     </div>
@@ -306,10 +249,7 @@ const Manufacturer_product_upload = () => {
                         </div>
                         <div className="flex gap-5">
                             <div className="w-full md:w-1/2 lg:w-1/2">
-                                <label
-                                    htmlFor="countries"
-                                    className="block mb-2 text-sm font-medium text-gray-900 dark:text-white"
-                                >
+                                <label htmlFor="countries" className="block mb-2 text-sm font-medium text-gray-900 dark:text-white">
                                     Product Type
                                 </label>
                                 <select
@@ -328,10 +268,7 @@ const Manufacturer_product_upload = () => {
                                 </select>
                             </div>
                             <div className="w-full md:w-1/2 lg:w-1/2">
-                                <label
-                                    htmlFor="countries"
-                                    className="block mb-2 text-sm font-medium text-gray-900 dark:text-white"
-                                >
+                                <label htmlFor="countries" className="block mb-2 text-sm font-medium text-gray-900 dark:text-white">
                                     Store Type
                                 </label>
                                 <select
@@ -352,49 +289,10 @@ const Manufacturer_product_upload = () => {
                         </div>
                         <div className="flex gap-5">
                             <div className="w-full md:w-1/2 lg:w-1/2 mt-7">
-                                <label
-                                    className="text-slate-400 "
-                                    type="select"
-                                    name="rating_count"
-                                    value={values.rating_count}
-                                    onChange={handleChange}
-                                >
-                                    {" "}
+                                <label className="text-slate-400 " type="select" name="rating_count" value={values.rating_count} onChange={handleChange}>
                                     O Ratings & 0 Reviews
                                 </label>
                             </div>
-                            {/* <div className="w-full md:w-1/2 lg:w-1/2 mt-3">
-                                <label className="uppercase text-xs">product rating</label>
-                                <Box
-                                    sx={{
-                                        width: 200,
-                                        display: "flex",
-                                        alignItems: "center",
-                                    }}
-                                >
-                                    <Rating
-                                        type="number"
-                                        name="hover-feedback"
-                                        value={values}
-                                        precision={0.5}
-                                        getLabelText={getLabelText}
-                                        onChange={(event, newValue) => {
-                                            setValue(newValue);
-                                        }}
-                                        onChangeActive={(event, newHover) => {
-                                            setHover(newHover);
-                                        }}
-                                        emptyIcon={
-                                            <StarIcon style={{opacity: 0.55}} fontSize="inherit" />
-                                        }
-                                    />
-                                    {value !== null && (
-                                        <Box sx={{ml: 2}}>
-                                            {labels[hover !== -1 ? hover : value]}
-                                        </Box>
-                                    )}
-                                </Box>
-                            </div> */}
                         </div>
                     </div>
 
@@ -402,11 +300,8 @@ const Manufacturer_product_upload = () => {
                         <h5 className="text-lg font-medium py-4">Product Images</h5>
 
                         <div className="flex gap-3 flex-wrap justify-evenly lg:flex-nowrap ">
-                        {images?.map((item, index) => (
-                                <div
-                                    key={index}
-                                    className="relative max-w-[200px] w-full h-[200px] "
-                                >
+                            {images?.map((item, index) => (
+                                <div key={index} className="relative max-w-[200px] w-full h-[200px] ">
                                     {images[index] ? (
                                         <img
                                             src={URL.createObjectURL(images[index])}
@@ -423,12 +318,7 @@ const Manufacturer_product_upload = () => {
                                             alt="default-profile-pic"
                                         />
                                     )}
-                                    <input
-                                        type="file"
-                                        ref={inputRef}
-                                        onChange={(e) => handleImagechange(e, index)}
-                                        className="opacity-0 absolute inset-0 z-20"
-                                    />
+                                    <input type="file" ref={inputRef} onChange={(e) => handleImagechange(e, index)} className="opacity-0 absolute inset-0 z-20" />
                                 </div>
                             ))}
                         </div>
@@ -444,7 +334,7 @@ const Manufacturer_product_upload = () => {
                     </div>
                 </form>
             </div>
-        </>
+        </div>
     );
 };
 

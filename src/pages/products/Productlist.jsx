@@ -4,6 +4,7 @@ import { Link } from "react-router-dom";
 import VisibilityIcon from "@mui/icons-material/Visibility";
 import EditIcon from "@mui/icons-material/Edit";
 import DeleteIcon from "@mui/icons-material/Delete";
+import { baseURL } from "../../api";
 
 const Productlist = () => {
     const [orders, setOrders] = useState([]);
@@ -16,12 +17,12 @@ const Productlist = () => {
         manufacturer_id: "",
     });
 
-    const orderdata = () => {
-        axios
+    const searchinput = async () => {
+        await axios
             .get(`http://192.168.1.4:5000/product/get-products?search=${search}`)
             .then((res) => {
-                setOrders(res.data.data);
                 // console.log(res, "res");
+                setOrders(res.data.data);
             })
             .catch((err) => {
                 console.log(err);
@@ -47,8 +48,6 @@ const Productlist = () => {
             console.error("Error deleting data:", error);
         }
     };
-
-    
 
     return (
         <>
@@ -142,7 +141,7 @@ const Productlist = () => {
                                 <thead className="bg-gray-100 text-gray-600">
                                     <tr className="border-b border-gray-300">
                                         <th scope="col" className="px-4 py-2 border-r border-gray-300">
-                                            ID
+                                            UID
                                         </th>
                                         <th scope="col" className="px-4 py-2 border-r border-gray-300">
                                             Title
@@ -179,7 +178,7 @@ const Productlist = () => {
                                 <tbody>
                                     {orders.map((value, index) => (
                                         <tr key={index} className="bg-white border-b dark:bg-gray-800 dark:border-gray-700">
-                                            <td className="px-2 py-2 border-r border-gray-300 text-center">{index + 1}</td>
+                                            <td className="px-2 py-2 border-r border-gray-300 text-center">{value.product_id}</td>
                                             <td className="px-2 py-2 border-r border-gray-300 ">{value.product_title}</td>
                                             <td className="px-2 py-2 border-r border-gray-300">{value.product_brand}</td>
                                             <td className="px-2 py-2 border-r border-gray-300 text-center">{value.product_rating}</td>
@@ -187,7 +186,7 @@ const Productlist = () => {
                                             <td className="px-2 py-2 border-r border-gray-300 text-center">${value.product_price}</td>
                                             <td className="px-2 py-2 border-r border-gray-300 text-center">{value.product_stock_quantity}</td>
                                             <td className="px-2 py-2 border-r border-gray-300">
-                                                <img src={value.product_images} alt="abc" className="w-12 h-12 object-cover" />
+                                                <img src={`${baseURL}${value.product_images}`} alt="abc" className="w-12 h-12 object-cover" />
                                             </td>
                                             <td className="px-2 py-2 border-r border-gray-300">{value.seller_company_name}</td>
                                             <td className="px-2 py-2 border-r border-gray-300">{value.m_name}</td>

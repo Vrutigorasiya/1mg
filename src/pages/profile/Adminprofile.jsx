@@ -4,6 +4,7 @@ import { Button, Checkbox, Label, Modal, TextInput } from "flowbite-react";
 
 const Adminprofile = () => {
     const [openModal, setOpenModal] = useState(false);
+    const [image,setImage] = useState("")
 
     function onCloseModal() {
         setOpenModal(false);
