@@ -9,10 +9,12 @@ import { Link } from "react-router-dom";
 import VisibilityIcon from "@mui/icons-material/Visibility";
 import EditIcon from "@mui/icons-material/Edit";
 import DeleteIcon from "@mui/icons-material/Delete";
+import { baseURL } from "../api";
 
 const Dashboard = () => {
     const [orders, setOrders] = useState([]);
 
+    console.log(orders, "ordersss");
     const orderdata = () => {
         axios
             .get("http://192.168.1.4:5000/product/get-products")
@@ -26,7 +28,6 @@ const Dashboard = () => {
                 return;
             });
     };
-    // console.log(orders,"ordersss");
 
     useEffect(() => {
         orderdata();
@@ -244,7 +245,7 @@ const Dashboard = () => {
                                         <td className="px-2 py-2 border-r border-gray-300 text-center">${value.product_price}</td>
                                         <td className="px-2 py-2 border-r border-gray-300 text-center">{value.product_stock_quantity}</td>
                                         <td className="px-2 py-2 border-r border-gray-300">
-                                            <img src={value.product_img1} alt="abc" className="w-12 h-12 object-cover" />
+                                            <img src={`${baseURL}${value.product_images_path[0]}`} alt="abc" className="w-12 h-12 object-cover block mx-auto" />
                                         </td>
                                         <td className="px-2 py-2 border-r border-gray-300">{value.seller_company_name}</td>
                                         <td className="px-2 py-2 border-r border-gray-300">{value.m_name}</td>

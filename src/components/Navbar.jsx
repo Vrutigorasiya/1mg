@@ -13,7 +13,7 @@ const Navbar = ({ isOpen }) => {
     return (
         <>
             <div className={`hidden md:block max-w-[${!isOpen ? "80px" : "25px"}]`}>
-                <Sidebar className="h-full" collapsed={!isOpen}>
+                <Sidebar className="h-full " collapsed={!isOpen}>
                     <div className="flex py-3 px-5">
                         <img src="imgs/logo.jpg" alt="logo" className="w-8 lg:block md:w-11" />
                         {isOpen && <h3 className="uppercase font-bold md:text-xl my-auto pl-2">{"Dava's"} bazar</h3>}

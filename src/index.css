@@ -51,4 +51,7 @@ body {
 .close button {
     font-size: x-large;
 }
+.active {
+    color: red;
+  }
 

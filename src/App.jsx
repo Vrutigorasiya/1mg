@@ -15,6 +15,8 @@ import Adminprofile from "./pages/profile/Adminprofile";
 import Product_create from "./pages/products/create/Product_create";
 import Menufacturerview from "./pages/manufacturer/view/Menufacturerview";
 import MenufacturerList from "./pages/manufacturer/Menufacturerlist";
+import Menufacurerlist from "./pages/manufacturer/Menufacturerlist"
+import Menufacturerview from "./pages/manufacturer/view/Menufacturerview";
 
 
 function App() {
@@ -73,6 +75,14 @@ function App() {
                 {
                     path: "manufactureruploadform",
                     element: <Menufactureruploadform />,
+                },
+                {
+                    path: "manufacturerlist",
+                    element: <Menufacurerlist />,
+                },
+                {
+                    path: "manufacturerview",
+                    element: <Menufacturerview />,
                 },
                 {
                     path: "manufacturerlist",

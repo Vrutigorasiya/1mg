@@ -1,4 +1,5 @@
 import { Link } from "react-router-dom";
+import React from "react";
 
 const Menufacturerview = () => {
     return (
@@ -64,6 +65,8 @@ const Menufacturerview = () => {
             </section>
         </div>
     );
+};
+    return <div>Menufacturerview</div>;
 };
 
 export default Menufacturerview;
