@@ -5,6 +5,7 @@ import CategoryIcon from "@mui/icons-material/Category";
 import RateReviewIcon from "@mui/icons-material/RateReview";
 import { Link, useParams } from "react-router-dom";
 import axios from "axios";
+import { baseURL } from "../../../api";
 
 const Productview = () => {
     const eleemntref = useRef();
@@ -76,7 +77,7 @@ const Productview = () => {
                     <div>
                         {/* <h5 className="text-lg font-medium py-4 ">Product Gallery</h5> */}
                         <div>
-                            <img src="public/imgs/logo.png" alt="abc" className=" border-2 border-dashed border-neutral-300 rounded-md w-80"></img>
+                            <img src={`${baseURL}${data?.product_images_path?.[0]}`} alt="abc" className=" border-2 border-dashed border-neutral-300 rounded-md w-80"></img>
                         </div>
                         <div className="mt-3 flex justify-between">
                             <img src="public/imgs/medicine.jpg" alt="abc" className="border-2 border-dashed border-neutral-300 rounded-md xl:max-w-[74px] max-w-[40px] w-full"></img>
