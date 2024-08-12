@@ -4,7 +4,7 @@ import {Link} from "react-router-dom";
 import {useFormik} from "formik";
 import {api} from "../../../api";
 
-const Manufacturer_product_upload = () => {
+const Product_create = () => {
     const [files, setFiles] = useState([]);
     const [stars, setStars] = useState(0);
 
@@ -267,7 +267,7 @@ const Manufacturer_product_upload = () => {
                                     value={values.products_type}
                                     onChange={handleChange}
                                 >
-                                    <option selected>Choose a country</option>
+                                    <option value="Country">Country</option>
                                     <option value="US">United States</option>
                                     <option value="CA">Canada</option>
                                     <option value="FR">France</option>
@@ -289,7 +289,7 @@ const Manufacturer_product_upload = () => {
                                     value={values.store_type}
                                     onChange={handleChange}
                                 >
-                                    <option selected>Choose a country</option>
+                                    <option value="Country">Country</option>
                                     <option value="US">United States</option>
                                     <option value="CA">Canada</option>
                                     <option value="FR">France</option>
@@ -340,4 +340,4 @@ const Manufacturer_product_upload = () => {
     );
 };
 
-export default Manufacturer_product_upload;
+export default Product_create;

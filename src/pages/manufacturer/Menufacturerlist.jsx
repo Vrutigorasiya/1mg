@@ -6,7 +6,7 @@ import EditIcon from "@mui/icons-material/Edit";
 import DeleteIcon from "@mui/icons-material/Delete";
 import { baseURL } from "../../api";
 
-const ManufacturerList = () => {
+const MenufacturerList = () => {
     const [orders, setOrders] = useState([]);
     const [search, setSearch] = useState("");
 
@@ -122,9 +122,9 @@ const ManufacturerList = () => {
                                     />
                                 </div>
                             </form>
-                            <Link to="/manufacturer_product_list_upload">
-                                <button className="w-full lg:w-40  md:w-40 px-5 py-2.5 focus:outline-none text-white bg-green-700 hover:bg-green-800 focus:ring-4 focus:ring-green-300 font-medium rounded-lg  dark:bg-green-600 dark:hover:bg-green-700 dark:focus:ring-green-800 text-base">
-                                    Create Product
+                            <Link to="/manufactureruploadform">
+                                <button className="w-full lg:w-40  md:w-40 p-2 focus:outline-none text-white bg-green-700 hover:bg-green-800 focus:ring-4 focus:ring-green-300 font-medium rounded-lg  dark:bg-green-600 dark:hover:bg-green-700 dark:focus:ring-green-800 text-base">
+                                    Create Menufacturer
                                 </button>
                             </Link>
                         </div>
@@ -177,7 +177,7 @@ const ManufacturerList = () => {
                                             <td className="px-2 py-2 border-r border-gray-300 text-center">{order.m_c_name}</td>
                                             <td className="px-2 py-5 gap-2 flex">
                                                 {/* <Link to={`/manufacturerview/${order.product_id}`}> */}
-                                                <Link to={`/manufacturerview`}>
+                                                <Link to={`/menufacturer_view`}>
                                                     <VisibilityIcon className="bg-slate-300 rounded !text-xl" />
                                                 </Link>
                                                 <Link to="/manufactureruploadform">
@@ -197,4 +197,4 @@ const ManufacturerList = () => {
     );
 };
 
-export default ManufacturerList;
+export default MenufacturerList;

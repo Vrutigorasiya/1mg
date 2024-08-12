@@ -32,7 +32,7 @@ const Productview = () => {
 
     useEffect(() => {
         productviewdata();
-    }, []);
+    },[]);
 
     return (
         <div ref={eleemntref}>

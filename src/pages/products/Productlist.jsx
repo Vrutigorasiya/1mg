@@ -10,13 +10,6 @@ const Productlist = () => {
     const [orders, setOrders] = useState([]);
     const [search, setSearch] = useState("");
 
-    const [product, setProduct] = useState({
-        name: "",
-        price: "",
-        seller_id: "",
-        manufacturer_id: "",
-    });
-
     const searchinput = async () => {
         await axios
             .get(`http://192.168.1.4:5000/product/get-products?search=${search}`)
@@ -129,7 +122,7 @@ const Productlist = () => {
                                     />
                                 </div>
                             </form>
-                            <Link to="/productcreateform">
+                            <Link to="/product_createform">
                                 <button className="w-full lg:w-40  md:w-40 px-5 py-2.5 focus:outline-none text-white bg-green-700 hover:bg-green-800 focus:ring-4 focus:ring-green-300 font-medium rounded-lg  dark:bg-green-600 dark:hover:bg-green-700 dark:focus:ring-green-800 text-base">
                                     Create Product
                                 </button>

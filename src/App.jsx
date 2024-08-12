@@ -10,10 +10,11 @@ import Registerform from "./components/Registeform";
 import Adminorder from "./pages/adminorders/Adminorder";
 import Error from "./components/Error";
 import Productview from "./pages/products/view/Productview";
-import Productcreateform from "./pages/products/create/Productcreateform";
 import Menufactureruploadform from "./pages/manufacturer/create/Menufactureruploadform";
-import Manufacturer_product_upload from "./pages/manufacturer/product create/Manufacturer_product_upload";
 import Adminprofile from "./pages/profile/Adminprofile";
+import Product_create from "./pages/products/create/Product_create";
+import Menufacturerview from "./pages/manufacturer/view/Menufacturerview";
+import MenufacturerList from "./pages/manufacturer/Menufacturerlist";
 
 
 function App() {
@@ -57,8 +58,8 @@ function App() {
                     element: <Productlist />,
                 },
                 {
-                    path: "productcreateform",
-                    element: <Productcreateform />,
+                    path: "product_createform",
+                    element: <Product_create />,
                 },
                 {
                     path: "productview",
@@ -74,8 +75,12 @@ function App() {
                     element: <Menufactureruploadform />,
                 },
                 {
-                    path: "manufacturer_product_list_upload",
-                    element: <Manufacturer_product_upload />,
+                    path: "manufacturerlist",
+                    element: <MenufacturerList />,
+                },
+                {
+                    path: "menufacturer_view",
+                    element: <Menufacturerview />,
                 },
                 {
                     path: "user",
